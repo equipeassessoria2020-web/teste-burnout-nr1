@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico de Estresse e Burnout Corporativo (NR-1)</title>
+    <style>
+        :root {
+            --primary: #2b5a8f;
+            --bg: #f4f7f6;
+            --text: #333;
+            --card-bg: #ffffff;
+            --green: #2ecc71;
+            --yellow: #f1c40f;
+            --red: #e74c3c;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .legal-box {
+            background-color: #ebf3f9;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #444;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .question p {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .option-label {
+            flex: 1;
+            text-align: center;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .options input[type="radio"] {
+            display: none;
+        }
+
+        .options input[type="radio"]:checked + .option-label {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            font-weight: bold;
+        }
+
+        .option-label:hover {
+            background: #eee;
+        }
+
+        /* Espaço reservado para o Google AdSense */
+        .adsense-placeholder {
+            background: #f9f9f9;
+            border: 1px dashed #bbb;
+            color: #888;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            margin: 20px 0;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button.btn-submit {
+            display: block;
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: background 0.2s;
+        }
+
+        button.btn-submit:hover {
+            background: #1e436d;
+        }
+
+        #result-section {
+            display: none;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 3px solid var(--primary);
+            text-align: center;
+        }
+
+        .thermometer-container {
+            background: #eee;
+            border-radius: 20px;
+            height: 30px;
+            width: 100%;
+            margin: 20px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .thermometer-bar {
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease-in-out, background-color 0.5s;
+        }
+
+        .result-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .result-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 11px;
+            color: #999;
+            text-align: center;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Avaliação de Riscos Psicossociais Ocupacionais</h1>
+    <div class="subtitle">Ferramenta corporativa de triagem de saúde mental, estresse e esgotamento para colaboradores e gestores.</div>
+
+    <div class="legal-box">
+        <strong>⚠️ CONFORMIDADE LEGAL (NR-1):</strong> Conforme a atualização da <strong>Norma Regulamentadora nº 1 (NR-1)</strong>, empresas de todos os setores têm a obrigatoriedade legal de gerenciar riscos psicossociais no ambiente de trabalho. Este inventário atua como ferramenta de apoio ao gerenciamento de saúde ocupacional. <br>
+        <strong>🔬 FUNDAMENTAÇÃO CIENTÍFICA:</strong> Baseado nos eixos analíticos do <em>Maslach Burnout Inventory (MBI)</em>, padrão internacional de triagem para a Síndrome de Esgotamento Profissional.
+    </div>
+
+    <!-- BLOCO DE ANÚNCIO SUPERIOR -->
+    <div class="adsense-placeholder">[ Espaço para Anúncio AdSense - Topo ]</div>
+
+    <form id="burnout-form">
+        <!-- As 10 perguntas serão geradas dinamicamente via JS para economizar código -->
+        <div id="questions-container"></div>
+
+        <!-- BLOCO DE ANÚNCIO MEIO -->
+        <div class="adsense-placeholder">[ Espaço para Anúncio AdSense - Meio do Teste ]</div>
+
+        <button type="button" class="btn-submit" onclick="calcularBurnout()">📊 CALCULAR DIAGNÓSTICO CORPORATIVO</button>
+    </form>
+
+    <div id="result-section">
+        <h2>Resultado da Avaliação</h2>
+        <div id="badge-target" class="result-badge">Nível</div>
+        
+        <div class="thermometer-container">
+            <div id="bar-target" class="thermometer-bar"></div>
+        </div>
+
+        <div id="text-target" class="result-text"></div>
+
+        <!-- BLOCO DE ANÚNCIO RESULTADO -->
+        <div class="adsense-placeholder">[ Espaço para Anúncio AdSense - Abaixo do Resultado ]</div>
+    </div>
+
+    <footer>
+        <strong>Nota de Responsabilidade:</strong> Este teste online constitui uma ferramenta informativa de triagem e mapeamento preliminar de clima/saúde. Não configura e não substitui de forma alguma o diagnóstico clínico emitido por Médicos do Trabalho, Psicólogos ou Psiquiatras habilitados.
+    </footer>
+</div>
+
+<script>
+    // 10 Perguntas validadas e adaptadas para ambiente corporativo geral
+    const perguntas = [
+        "Sinto-me emocionalmente esgotado e sem forças devido à minha rotina de trabalho.",
+        "Ao final da jornada diária de trabalho, sinto-me completamente sem energias físicas ou mentais.",
+        "Acordo pela manhã cansado e sem disposição para encarar outra jornada profissional.",
+        "Sinto que estou me tornando mais frio, cínico ou distante das pessoas no ambiente corporativo.",
+        "Tenho percebido menor paciência ou preocupação com o que acontece com clientes, colegas ou demandas.",
+        "Sinto que perdi o entusiasmo genuíno que costumava ter pela minha profissão.",
+        "Tenho a nítida impressão de que estou produzindo muito menos do que sou capaz de entregar.",
+        "Sinto que as tarefas que realizo no meu emprego atual perderam o sentido ou o valor real.",
+        "Fico facilmente irritado com pequenos contratempos ou problemas na minha rotina laboral.",
+        "Sinto que minha paciência com lideranças, dinâmicas internas ou cobranças atingiu o limite."
+    ];
+
+    const container = document.getElementById('questions-container');
+
+    // Renderiza as perguntas na tela automaticamente
+    perguntas.forEach((q, index) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = 'question';
+        qDiv.innerHTML = `
+            <p>${index + 1}. ${q}</p>
+            <div class="options">
+                <input type="radio" name="q${index}" id="q${index}_1" value="1" required><label class="option-label" for="q${index}_1">Nunca</label>
+                <input type="radio" name="q${index}" id="q${index}_2" value="2"><label class="option-label" for="q${index}_2">Raramente</label>
+                <input type="radio" name="q${index}" id="q${index}_3" value="3"><label class="option-label" for="q${index}_3">Às vezes</label>
+                <input type="radio" name="q${index}" id="q${index}_4" value="4"><label class="option-label" for="q${index}_4">Frequentemente</label>
+                <input type="radio" name="q${index}" id="q${index}_5" value="5"><label class="option-label" for="q${index}_5">Sempre</label>
+            </div>
+        `;
+        container.appendChild(qDiv);
+    });
+
+    function calcularBurnout() {
+        let total = 0;
+        let respondidas = 0;
+
+        for(let i=0; i<perguntas.length; i++) {
+            const rbs = document.getElementsByName('q'+i);
+            for(const rb of rbs) {
+                if(rb.checked) {
+                    total += parseInt(rb.value);
+                    respondidas++;
+                    break;
+                }
+            }
+        }
+
+        if(respondidas < perguntas.length) {
+            alert("Por favor, responda a todas as 10 perguntas antes de calcular o resultado.");
+            return;
+        }
+
+        // Exibe a seção de resultados
+        const resultSection = document.getElementById('result-section');
+        resultSection.style.display = 'block';
+
+        // Elementos de tela
+        const badge = document.getElementById('badge-target');
+        const bar = document.getElementById('bar-target');
+        const text = document.getElementById('text-target');
+
+        // Calcula a porcentagem para o termômetro gráfico (escala de 10 a 50 pontos)
+        let percentual = ((total - 10) / 40) * 100;
+        bar.style.width = percentual + '%';
+
+        // Lógica das faixas de risco (Verde, Amarelo, Vermelho)
+        if(total <= 22) {
+            badge.innerText = "Nível Baixo: Estresse Sob Controle (" + total + " pts)";
+            badge.style.backgroundColor = "var(--green)";
+            bar.style.backgroundColor = "var(--green)";
+            text.innerHTML = "<strong>Diagnóstico Ambulatorial:</strong> Seus índices de esgotamento estão dentro da normalidade operacional. O estresse apresentado faz parte da rotina comum e está gerenciável. <br><br><em>Recomendação Corporativa:</em> Mantenha as práticas atuais de equilíbrio entre vida profissional e pessoal. Ideal para fins de manutenção preventiva no PGR (Programa de Gerenciamento de Riscos) da empresa.";
+        } else if(total <= 36) {
+            badge.innerText = "Nível Médio: Sinal de Alerta (" + total + " pts)";
+            badge.style.backgroundColor = "var(--yellow)";
+            badge.style.color = "#333";
+            bar.style.backgroundColor = "var(--yellow)";
+            text.innerHTML = "<strong>Diagnóstico Ambulatorial:</strong> Atenção. Indicadores demonstram acúmulo moderado de fadiga emocional e distanciamento das funções cotidianas. Existe risco iminente de evolução para quadro crônico se não houver intervenção de manejo.<br><br><em>Recomendação Corporativa:</em> Recomenda-se à gestão avaliar a sobrecarga de demandas, incentivar pausas regulares e monitorar o clima da equipe para atender às diretrizes preventivas de riscos psicossociais da NR-1.";
+        } else {
+            badge.innerText = "Nível Crítico: Alto Risco de Burnout (" + total + " pts)";
+            badge.style.backgroundColor = "var(--red)";
+            badge.style.color = "white";
+            bar.style.backgroundColor = "var(--red)";
+            text.innerHTML = "<strong>Diagnóstico Ambulatorial:</strong> Alerta Crítico. Os dados apontam níveis severos de exaustão emocional, despersonalização e queda severa na percepção de eficácia profissional. Compatível com alto risco ou presença da Síndrome de Burnout.<br><br><em>Recomendação Corporativa:</em> Medidas de contingência imediatas são necessárias. Sugere-se encaminhamento do colaborador para avaliação médica/psicológica especializada, revisão urgente da escala/volume de trabalho e registro de ações preventivas no prontuário de segurança do trabalho da instituição.";
+        }
+
+        // Rola a página suavemente até o resultado
+        resultSection.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
