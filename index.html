@@ -24,8 +24,10 @@
         .intro-box { background: #f0f7ff; border-left: 4px solid var(--primary-light); padding: 15px; border-radius: 0 8px 8px 0; margin-bottom: 25px; }
         .intro-box p { font-size: 14px; line-height: 1.5; color: #1e293b; text-align: justify; }
 
+        /* Ajustado para garantir que o JavaScript e o CSS usem o mesmo nome */
         .question-block { display: none; margin-top: 20px; margin-bottom: 20px; }
         .question-block.active { display: block !important; }
+        
         .question-text { font-size: 18px; font-weight: 600; margin-bottom: 15px; color: #1e293b; line-height: 1.4; }
         .options { display: flex; flex-direction: column; gap: 10px; }
         button.option-btn { background: #f1f5f9; border: 2px solid #e2e8f0; padding: 14px; border-radius: 8px; text-align: left; font-size: 15px; cursor: pointer; transition: all 0.2s; color: var(--text); font-weight: 500; }
@@ -52,7 +54,7 @@
 <body>
 
 <div class="container">
-    <img src="image_0.png" alt="Simulador de Burnout" class="header-image">
+    <img src="https://images2.imgbox.com/f0/54/tZ7wZgqK_o.png" alt="Simulador de Burnout" class="header-image">
     
     <div class="content-padding">
         <div id="quiz-container">
@@ -113,7 +115,7 @@
 
     questions.forEach((q, index) => {
         const qDiv = document.createElement('div');
-        qDiv.className = 'question-block';
+        qDiv.className = 'question-block'; // Alinhado com o CSS acima
         qDiv.id = `q-${index}`;
         if(index === 0) qDiv.className = 'question-block active';
         
