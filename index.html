@@ -15,21 +15,20 @@
         body { background-color: var(--bg); color: var(--text); padding: 15px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
         .container { background: white; max-width: 600px; width: 100%; padding: 0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); overflow: hidden; }
         
-        /* ESTILO DA IMAGEM DE CABEÇALHO */
-        .header-image { width: 100%; height: auto; display: block; object-fit: cover; border-bottom: 3px solid var(--primary-light); }
+        /* IMAGEM COM CORREÇÃO DE ERRO */
+        .header-image { width: 100%; height: auto; display: block; object-fit: cover; border-bottom: 3px solid var(--primary-light); background: #f1f5f9; }
         
         .content-padding { padding: 25px; }
         
         h1 { color: var(--primary); font-size: 24px; margin-bottom: 10px; text-align: center; font-weight: 700; }
         p.subtitle { text-align: center; font-size: 13px; color: #64748b; margin-bottom: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
         
-        /* CAIXA DE INTRODUÇÃO CHAMATIVA */
         .intro-box { background: #f0f7ff; border-left: 4px solid var(--primary-light); padding: 15px; border-radius: 0 8px 8px 0; margin-bottom: 25px; }
         .intro-box p { font-size: 14px; line-height: 1.5; color: #1e293b; text-align: justify; }
-        .intro-box strong { color: var(--primary); }
-
-        .question { display: none; margin-bottom: 20px; }
-        .question.active { display: block; animation: fadeIn 0.5s; }
+        
+        /* GARANTIA DE VISIBILIDADE DAS PERGUNTAS */
+        .question { display: none; margin-top: 20px; margin-bottom: 20px; }
+        .question.active { display: block !important; animation: fadeIn 0.5s; }
         .question-text { font-size: 18px; font-weight: 600; margin-bottom: 15px; color: #1e293b; line-height: 1.4; }
         .options { display: flex; flex-direction: column; gap: 10px; }
         button.option-btn { background: #f1f5f9; border: 2px solid #e2e8f0; padding: 14px; border-radius: 8px; text-align: left; font-size: 15px; cursor: pointer; transition: all 0.2s; color: var(--text); font-weight: 500; }
@@ -44,7 +43,6 @@
         .thermometer-fill { height: 100%; width: 0%; transition: width 1s ease-out; }
         .status-badge { display: inline-block; padding: 6px 16px; border-radius: 20px; font-weight: bold; font-size: 18px; margin-top: 10px; }
         
-        /* BOTÃO DE VENDAS DA HOTMART */
         .cta-box { display: none; margin-top: 30px; padding: 20px; border: 2px dashed #34d399; background: #ecfdf5; border-radius: 10px; animation: pulse 2s infinite; }
         .cta-title { font-size: 18px; font-weight: bold; color: #065f46; margin-bottom: 10px; }
         .cta-text { font-size: 14px; color: #047857; margin-bottom: 15px; text-align: justify; line-height: 1.5; }
@@ -59,7 +57,7 @@
 <body>
 
 <div class="container">
-    <img src="image_0.png" alt="Simulador de Burnout" class="header-image">
+    <img src="image_0.png" onerror="this.src='image_0.png.png'; this.onerror=function(){this.style.display='none';};" alt="Simulador de Burnout" class="header-image">
     
     <div class="content-padding">
         <div id="quiz-container">
@@ -143,19 +141,28 @@
         questionsGroup.appendChild(qDiv);
     });
 
-    // Ativa a primeira pergunta
-    document.getElementById('q-0').classList.add('active');
+    // Força a exibição imediata da primeira pergunta na tela
+    window.onload = function() {
+        const firstQ = document.getElementById('q-0');
+        if(firstQ) {
+            firstQ.classList.add('active');
+            firstQ.style.display = 'block';
+        }
+    };
 
     function handleAnswer(weight) {
         totalScore += weight;
         document.getElementById(q-${currentQuestion}).classList.remove('active');
+        document.getElementById(q-${currentQuestion}).style.display = 'none';
         currentQuestion++;
 
         const progressPercent = (currentQuestion / questions.length) * 100;
         document.getElementById('progress').style.width = ${progressPercent}%;
 
         if (currentQuestion < questions.length) {
-            document.getElementById(q-${currentQuestion}).classList.add('active');
+            const nextQ = document.getElementById(q-${currentQuestion});
+            nextQ.classList.add('active');
+            nextQ.style.display = 'block';
         } else {
             showResults();
         }
