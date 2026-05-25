@@ -95,7 +95,6 @@
 </div>
 
 <script>
-    // Lista expandida para 10 perguntas profissionais sobre estresse e esgotamento
     const questions = [
         "Com que frequência você se sente emocionalmente exausto devido ao trabalho?",
         "Com que frequência você sente que seu sono não é suficiente para recuperar as energias?",
@@ -116,7 +115,6 @@
         { text: "Todos os dias constantemente", weight: 6 }
     ];
 
-    // O cálculo agora se adapta automaticamente ao número de perguntas (10 perguntas * peso máximo 6 = 60 pontos)
     const maxScore = questions.length * 6;
     const questionsGroup = document.getElementById('questions-group');
 
@@ -174,14 +172,13 @@
 
         setTimeout(() => { fill.style.width = `${finalPercent}%`; }, 100);
 
-        // Ajuste proporcional das faixas de risco para as 10 perguntas
         if (totalScore <= 24) {
             badge.innerText = "Risco Baixo";
             badge.style.backgroundColor = "#d1fae5";
             badge.style.color = "#065f46";
             fill.style.backgroundColor = "#10b981";
             text.innerText = `Pontuação: ${totalScore} de ${maxScore} pontos.`;
-            desc.innerText = "Seus níveis de estresse e esgotamento encontram-se dentro da normalidade operacional. Continue monitorando sua rotina e mantendo hábitos saudáveis de desconexão após o expediente.";
+            desc.innerText = "Seus níveis de estresse e esgotamento encontram-se dentro da normalidade operacional. Continue monitorando sua rotina e mantendo hábitos saudáveis de desconexão após o expediente. Lembramos que este simulador é uma ferramenta de triagem educativa e não substitui uma avaliação profissional.";
             ctaBox.style.display = "none";
         } else if (totalScore <= 44) {
             badge.innerText = "Risco Moderado";
@@ -189,15 +186,17 @@
             badge.style.color = "#92400e";
             fill.style.backgroundColor = "#f59e0b";
             text.innerText = `Pontuação: ${totalScore} de ${maxScore} pontos.`;
-            desc.innerText = "Atenção. Seus índices apontam para um estado inicial de estresse ocupacional crônico. Sinais de fadiga física e mental começam a interferir na sua qualidade de vida. É recomendável estabelecer limites claros.";
+            // ADICIONADO O AVISO EXPLICATIVO DE FORMA CLARA AQUI:
+            desc.innerText = "Atenção. Seus índices apontam para um estado inicial de estresse ocupacional crônico. Sinais de fadiga física e mental começam a interferir na sua qualidade de vida. É recomendável estabelecer limites claros. Importante: Este teste serve como triagem informativa e preventiva baseada na NR-1, mas não substitui em hipótese alguma o diagnóstico ou a consulta com um profissional de saúde mental, médico ou psicólogo.";
             ctaBox.style.display = "block";
         } else {
             badge.innerText = "Risco Alto / Crítico";
             badge.style.backgroundColor = "#fee2e2";
             badge.style.color = "#991b1b";
             fill.style.backgroundColor = "#ef4444";
-            text.innerText = `Pontuação: ${totalScore} de ${maxScore} pontos.`;
-            desc.innerText = "Alerta Vermelho. Seus resultados indicam uma forte compatibilidade com a Síndrome de Burnout (Esgotamento Crônico). Seu corpo e sua mente estão operando no limite de segurança fisiológica. É fundamental buscar apoio técnico e aplicar medidas urgentes diárias.";
+            text.innerText = `Pontuação: ${totalScore} de ${maxScore} points.`;
+            // ADICIONADO TAMBÉM NO RISCO CRÍTICO:
+            desc.innerText = "Alerta Vermelho. Seus resultados indicam uma forte compatibilidade com a Síndrome de Burnout (Esgotamento Crônico). Seu corpo e sua mente estão operando no limite de segurança fisiológica. É fundamental buscar apoio técnico e aplicar medidas urgentes diárias. Nota obrigatória: Este simulador é uma ferramenta de apoio educacional e de autoavaliação; ele não substitui um diagnóstico clínico ou parecer de um profissional especializado.";
             ctaBox.style.display = "block";
         }
     }
