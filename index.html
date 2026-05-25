@@ -85,8 +85,8 @@
             
             <div class="cta-box" id="cta-box">
                 <p class="cta-title">📘 Precisa de Ajuda Prática Imediata?</p>
-                <p class="cta-text">Baixe agora o <strong>Manual de Sobrevivência ao Burnout e ao Estresse</strong> e aprenda técnicas discretas para controlar a ansiedade e impor limites saudáveis no trabalho sem risco de demissão.</p>
-                <a href="https://go.hotmart.com/B105978148W" target="_blank" class="buy-btn">Quero o Manual Prático</a>
+                <p class="cta-text">Baixe agora o <strong>Manual de Sobrevivência ao Burnout e ao Estresse</strong> e aprenda técnicas discretas para controlar a ansiedade e impor limites saudáveis no trabalho sem risco de demissão. <strong>Além do Manual, você receberá inteiramente de bônus o guia digital "Saiba Seus Direitos Trabalhistas"</strong>, para se proteger integralmente respaldado pela lei.</p>
+                <a href="https://go.hotmart.com/B105978148W" target="_blank" class="buy-btn">Quero o Manual + Bônus</a>
             </div>
 
             <p class="footer-note">Aviso: Este simulador é uma ferramenta de triagem educativa baseada no Inventário de Burnout de Maslach (MBI) e apoio à NR-1. Não substitui consulta ou diagnóstico médico/psicológico profissional.</p>
@@ -95,12 +95,18 @@
 </div>
 
 <script>
+    // Lista expandida para 10 perguntas profissionais sobre estresse e esgotamento
     const questions = [
         "Com que frequência você se sente emocionalmente exausto devido ao trabalho?",
         "Com que frequência você sente que seu sono não é suficiente para recuperar as energias?",
         "Com que frequência você sente ansiedade ou aperto no peito ao pensar no expediente (especialmente aos domingos)?",
         "Com que frequência você percebe que perde a paciência facilmente com colegas, chefes ou familiares?",
-        "Com que frequência você sente que, por mais que trabalhe, suas demandas nunca diminuem?"
+        "Com que frequência você sente que, por mais que trabalhe, suas demandas nunca diminuem?",
+        "Com que frequência você sente falta de entusiasmo e desânimo crônico ao iniciar sua jornada de trabalho?",
+        "Com que frequência você sente dores físicas constantes (como dor de cabeça, tensões no pescoço ou problemas digestivos) ligadas ao estresse?",
+        "Com que frequência você sente vontade de se isolar de colegas de trabalho e familiares no final do dia?",
+        "Com que frequência você sente que sua produtividade e memória diminuíram devido ao cansaço mental?",
+        "Com que frequência você se pega pensando em largar tudo ou se afastar por motivos de saúde?"
     ];
 
     const alternatives = [
@@ -110,6 +116,7 @@
         { text: "Todos os dias constantemente", weight: 6 }
     ];
 
+    // O cálculo agora se adapta automaticamente ao número de perguntas (10 perguntas * peso máximo 6 = 60 pontos)
     const maxScore = questions.length * 6;
     const questionsGroup = document.getElementById('questions-group');
 
@@ -167,7 +174,8 @@
 
         setTimeout(() => { fill.style.width = `${finalPercent}%`; }, 100);
 
-        if (totalScore <= 12) {
+        // Ajuste proporcional das faixas de risco para as 10 perguntas
+        if (totalScore <= 24) {
             badge.innerText = "Risco Baixo";
             badge.style.backgroundColor = "#d1fae5";
             badge.style.color = "#065f46";
@@ -175,7 +183,7 @@
             text.innerText = `Pontuação: ${totalScore} de ${maxScore} pontos.`;
             desc.innerText = "Seus níveis de estresse e esgotamento encontram-se dentro da normalidade operacional. Continue monitorando sua rotina e mantendo hábitos saudáveis de desconexão após o expediente.";
             ctaBox.style.display = "none";
-        } else if (totalScore <= 22) {
+        } else if (totalScore <= 44) {
             badge.innerText = "Risco Moderado";
             badge.style.backgroundColor = "#fef3c7";
             badge.style.color = "#92400e";
@@ -194,3 +202,6 @@
         }
     }
 </script>
+
+</body>
+</html>
