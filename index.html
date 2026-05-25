@@ -52,7 +52,7 @@
 <body>
 
 <div class="container">
-    <img src="<img src="<image_O.png.jpeg>" alt="Simulador de Burnout" class="header-image">
+    <img src="image_O.png" alt="Simulador de Burnout" class="header-image">
     
     <div class="content-padding">
         <div id="quiz-container">
@@ -136,7 +136,6 @@
         questionsGroup.appendChild(qDiv);
     });
 
-    // Executa imediatamente para garantir que a pergunta apareça
     function iniciarQuiz() {
         const firstQ = document.getElementById('q-0');
         if(firstQ) {
@@ -144,6 +143,7 @@
         }
     }
     
+    // Força o carregamento imediato
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', iniciarQuiz);
     } else {
