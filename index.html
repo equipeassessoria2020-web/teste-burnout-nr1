@@ -15,9 +15,7 @@
         body { background-color: var(--bg); color: var(--text); padding: 15px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
         .container { background: white; max-width: 600px; width: 100%; padding: 0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); overflow: hidden; }
         
-        /* IMAGEM COM CORREÇÃO DE ERRO */
-        .header-image { width: 100%; height: auto; display: block; object-fit: cover; border-bottom: 3px solid var(--primary-light); background: #f1f5f9; }
-        
+        .header-image { width: 100%; height: auto; display: block; object-fit: cover; border-bottom: 3px solid var(--primary-light); }
         .content-padding { padding: 25px; }
         
         h1 { color: var(--primary); font-size: 24px; margin-bottom: 10px; text-align: center; font-weight: 700; }
@@ -25,10 +23,9 @@
         
         .intro-box { background: #f0f7ff; border-left: 4px solid var(--primary-light); padding: 15px; border-radius: 0 8px 8px 0; margin-bottom: 25px; }
         .intro-box p { font-size: 14px; line-height: 1.5; color: #1e293b; text-align: justify; }
-        
-        /* GARANTIA DE VISIBILIDADE DAS PERGUNTAS */
+
         .question { display: none; margin-top: 20px; margin-bottom: 20px; }
-        .question.active { display: block !important; animation: fadeIn 0.5s; }
+        .question.active { display: block !important; }
         .question-text { font-size: 18px; font-weight: 600; margin-bottom: 15px; color: #1e293b; line-height: 1.4; }
         .options { display: flex; flex-direction: column; gap: 10px; }
         button.option-btn { background: #f1f5f9; border: 2px solid #e2e8f0; padding: 14px; border-radius: 8px; text-align: left; font-size: 15px; cursor: pointer; transition: all 0.2s; color: var(--text); font-weight: 500; }
@@ -37,27 +34,25 @@
         .progress-bar { width: 100%; height: 6px; background: #e2e8f0; border-radius: 3px; margin-bottom: 25px; overflow: hidden; }
         .progress { height: 100%; background: var(--primary-light); width: 0%; transition: width 0.3s; }
         
-        #result-container { display: none; text-align: center; animation: fadeIn 0.5s; }
+        #result-container { display: none; text-align: center; }
         .thermometer-box { margin: 25px 0; background: #f1f5f9; padding: 20px; border-radius: 10px; }
         .thermometer-bar { width: 100%; height: 20px; background: #e2e8f0; border-radius: 10px; overflow: hidden; margin-top: 10px; position: relative; }
         .thermometer-fill { height: 100%; width: 0%; transition: width 1s ease-out; }
         .status-badge { display: inline-block; padding: 6px 16px; border-radius: 20px; font-weight: bold; font-size: 18px; margin-top: 10px; }
         
-        .cta-box { display: none; margin-top: 30px; padding: 20px; border: 2px dashed #34d399; background: #ecfdf5; border-radius: 10px; animation: pulse 2s infinite; }
+        .cta-box { display: none; margin-top: 30px; padding: 20px; border: 2px dashed #34d399; background: #ecfdf5; border-radius: 10px; }
         .cta-title { font-size: 18px; font-weight: bold; color: #065f46; margin-bottom: 10px; }
         .cta-text { font-size: 14px; color: #047857; margin-bottom: 15px; text-align: justify; line-height: 1.5; }
         .buy-btn { display: inline-block; background: #10b981; color: white; text-decoration: none; padding: 14px 28px; font-weight: bold; font-size: 18px; border-radius: 8px; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); transition: all 0.2s; margin-top: 5px; }
         .buy-btn:hover { background: #059669; transform: scale(1.03); }
         
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(52, 211, 153, 0); } 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); } }
         .footer-note { font-size: 11px; color: #94a3b8; margin-top: 30px; text-align: center; line-height: 1.4; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <img src="image_0.png" onerror="this.src='image_0.png.png'; this.onerror=function(){this.style.display='none';};" alt="Simulador de Burnout" class="header-image">
+    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80" alt="Simulador de Burnout" class="header-image">
     
     <div class="content-padding">
         <div id="quiz-container">
@@ -141,28 +136,30 @@
         questionsGroup.appendChild(qDiv);
     });
 
-    // Força a exibição imediata da primeira pergunta na tela
-    window.onload = function() {
+    // Executa imediatamente para garantir que a pergunta apareça
+    function iniciarQuiz() {
         const firstQ = document.getElementById('q-0');
         if(firstQ) {
             firstQ.classList.add('active');
-            firstQ.style.display = 'block';
         }
-    };
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', iniciarQuiz);
+    } else {
+        iniciarQuiz();
+    }
 
     function handleAnswer(weight) {
         totalScore += weight;
         document.getElementById(q-${currentQuestion}).classList.remove('active');
-        document.getElementById(q-${currentQuestion}).style.display = 'none';
         currentQuestion++;
 
         const progressPercent = (currentQuestion / questions.length) * 100;
         document.getElementById('progress').style.width = ${progressPercent}%;
 
         if (currentQuestion < questions.length) {
-            const nextQ = document.getElementById(q-${currentQuestion});
-            nextQ.classList.add('active');
-            nextQ.style.display = 'block';
+            document.getElementById(q-${currentQuestion}).classList.add('active');
         } else {
             showResults();
         }
