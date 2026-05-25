@@ -12,18 +12,32 @@
             --text: #334155;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--bg); color: var(--text); padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .container { background: white; max-width: 600px; width: 100%; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
-        h1 { color: var(--primary); font-size: 24px; margin-bottom: 10px; text-align: center; }
-        p.subtitle { text-align: center; font-size: 14px; color: #64748b; margin-bottom: 25px; }
+        body { background-color: var(--bg); color: var(--text); padding: 15px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .container { background: white; max-width: 600px; width: 100%; padding: 0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); overflow: hidden; }
+        
+        /* ESTILO DA IMAGEM DE CABEÇALHO */
+        .header-image { width: 100%; height: auto; display: block; object-fit: cover; border-bottom: 3px solid var(--primary-light); }
+        
+        .content-padding { padding: 25px; }
+        
+        h1 { color: var(--primary); font-size: 24px; margin-bottom: 10px; text-align: center; font-weight: 700; }
+        p.subtitle { text-align: center; font-size: 13px; color: #64748b; margin-bottom: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        /* CAIXA DE INTRODUÇÃO CHAMATIVA */
+        .intro-box { background: #f0f7ff; border-left: 4px solid var(--primary-light); padding: 15px; border-radius: 0 8px 8px 0; margin-bottom: 25px; }
+        .intro-box p { font-size: 14px; line-height: 1.5; color: #1e293b; text-align: justify; }
+        .intro-box strong { color: var(--primary); }
+
         .question { display: none; margin-bottom: 20px; }
         .question.active { display: block; animation: fadeIn 0.5s; }
-        .question-text { font-size: 18px; font-weight: 600; margin-bottom: 15px; color: #1e293b; }
+        .question-text { font-size: 18px; font-weight: 600; margin-bottom: 15px; color: #1e293b; line-height: 1.4; }
         .options { display: flex; flex-direction: column; gap: 10px; }
-        button.option-btn { background: #f1f5f9; border: 2px solid #e2e8f0; padding: 12px; border-radius: 8px; text-align: left; font-size: 16px; cursor: pointer; transition: all 0.2s; color: var(--text); }
+        button.option-btn { background: #f1f5f9; border: 2px solid #e2e8f0; padding: 14px; border-radius: 8px; text-align: left; font-size: 15px; cursor: pointer; transition: all 0.2s; color: var(--text); font-weight: 500; }
         button.option-btn:hover { background: #e2e8f0; border-color: var(--primary-light); }
-        .progress-bar { width: 100%; height: 6px; background: #e2e8f0; border-radius: 3px; margin-bottom: 30px; overflow: hidden; }
+        
+        .progress-bar { width: 100%; height: 6px; background: #e2e8f0; border-radius: 3px; margin-bottom: 25px; overflow: hidden; }
         .progress { height: 100%; background: var(--primary-light); width: 0%; transition: width 0.3s; }
+        
         #result-container { display: none; text-align: center; animation: fadeIn 0.5s; }
         .thermometer-box { margin: 25px 0; background: #f1f5f9; padding: 20px; border-radius: 10px; }
         .thermometer-bar { width: 100%; height: 20px; background: #e2e8f0; border-radius: 10px; overflow: hidden; margin-top: 10px; position: relative; }
@@ -33,8 +47,8 @@
         /* BOTÃO DE VENDAS DA HOTMART */
         .cta-box { display: none; margin-top: 30px; padding: 20px; border: 2px dashed #34d399; background: #ecfdf5; border-radius: 10px; animation: pulse 2s infinite; }
         .cta-title { font-size: 18px; font-weight: bold; color: #065f46; margin-bottom: 10px; }
-        .cta-text { font-size: 14px; color: #047857; margin-bottom: 15px; }
-        .buy-btn { display: inline-block; background: #10b981; color: white; text-decoration: none; padding: 14px 28px; font-weight: bold; font-size: 18px; border-radius: 8px; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); transition: all 0.2s; }
+        .cta-text { font-size: 14px; color: #047857; margin-bottom: 15px; text-align: justify; line-height: 1.5; }
+        .buy-btn { display: inline-block; background: #10b981; color: white; text-decoration: none; padding: 14px 28px; font-weight: bold; font-size: 18px; border-radius: 8px; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); transition: all 0.2s; margin-top: 5px; }
         .buy-btn:hover { background: #059669; transform: scale(1.03); }
         
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -45,31 +59,40 @@
 <body>
 
 <div class="container">
-    <div id="quiz-container">
-        <h1>Simulador de Burnout e Estresse</h1>
-        <p class="subtitle">Avaliação Preliminar de Saúde Mental Individual (Diretrizes NR-1)</p>
-        <div class="progress-bar"><div class="progress" id="progress"></div></div>
-        <div id="questions-group"></div>
-    </div>
-
-    <div id="result-container">
-        <h1>Seu Resultado</h1>
-        <div class="thermometer-box">
-            <p id="result-text" style="font-size: 16px; font-weight: 500;"></p>
-            <div class="status-badge" id="status-badge"></div>
-            <div class="thermometer-bar">
-                <div class="thermometer-fill" id="thermometer-fill"></div>
+    <img src="image_0.png" alt="Simulador de Burnout" class="header-image">
+    
+    <div class="content-padding">
+        <div id="quiz-container">
+            <h1>Simulador de Burnout e Estresse</h1>
+            <p class="subtitle">Diretrizes da NR-1 e Saúde Ocupacional</p>
+            
+            <div class="intro-box">
+                <p>O esgotamento profissional silencioso destrói carreiras e casamentos antes mesmo dos primeiros sintomas físicos graves aparecerem. De acordo com as diretrizes de saúde da <strong>NR-1</strong>, identificar os sinais iniciais de estresse crônico é o único caminho para proteger sua mente e garantir sua estabilidade. Faça esta avaliação rápida de 5 perguntas e descubra seu nível de risco atual operacional.</p>
             </div>
-        </div>
-        <p id="result-desc" style="line-height: 1.5; color: #475569; margin-bottom: 20px;"></p>
-        
-        <div class="cta-box" id="cta-box">
-            <p class="cta-title">📘 Precisa de Ajuda Prática Imediata?</p>
-            <p class="cta-text">Baixe agora o <strong>Manual de Sobrevivência ao Burnout e ao Estresse</strong> e aprenda técnicas discretas para controlar a ansiedade e impor limites saudáveis no trabalho sem risco de demissão.</p>
-            <a href="https://go.hotmart.com/B105978148W" target="_blank" class="buy-btn">Quero o Manual Prático</a>
+
+            <div class="progress-bar"><div class="progress" id="progress"></div></div>
+            <div id="questions-group"></div>
         </div>
 
-        <p class="footer-note">Aviso: Este simulador é uma ferramenta de triagem educativa baseada no Inventário de Burnout de Maslach (MBI) e apoio à NR-1. Não substitui consulta ou diagnóstico médico/psicológico profissional.</p>
+        <div id="result-container">
+            <h1>Seu Resultado</h1>
+            <div class="thermometer-box">
+                <p id="result-text" style="font-size: 16px; font-weight: 500;"></p>
+                <div class="status-badge" id="status-badge"></div>
+                <div class="thermometer-bar">
+                    <div class="thermometer-fill" id="thermometer-fill"></div>
+                </div>
+            </div>
+            <p id="result-desc" style="line-height: 1.5; color: #475569; margin-bottom: 20px; text-align: justify;"></p>
+            
+            <div class="cta-box" id="cta-box">
+                <p class="cta-title">📘 Precisa de Ajuda Prática Imediata?</p>
+                <p class="cta-text">Baixe agora o <strong>Manual de Sobrevivência ao Burnout e ao Estresse</strong> e aprenda técnicas discretas para controlar a ansiedade e impor limites saudáveis no trabalho sem risco de demissão.</p>
+                <a href="https://go.hotmart.com/B105978148W" target="_blank" class="buy-btn">Quero o Manual Prático</a>
+            </div>
+
+            <p class="footer-note">Aviso: Este simulador é uma ferramenta de triagem educativa baseada no Inventário de Burnout de Maslach (MBI) e apoio à NR-1. Não substitui consulta ou diagnóstico médico/psicológico profissional.</p>
+        </div>
     </div>
 </div>
 
@@ -97,7 +120,7 @@
 
     questions.forEach((q, index) => {
         const qDiv = document.createElement('div');
-        qDiv.className = question ${index === 0 ? 'active' : ''};
+        qDiv.className = 'question';
         qDiv.id = q-${index};
         
         const qText = document.createElement('div');
@@ -119,6 +142,9 @@
         qDiv.appendChild(optionsDiv);
         questionsGroup.appendChild(qDiv);
     });
+
+    // Ativa a primeira pergunta
+    document.getElementById('q-0').classList.add('active');
 
     function handleAnswer(weight) {
         totalScore += weight;
@@ -155,7 +181,7 @@
             fill.style.backgroundColor = "#10b981";
             text.innerText = Pontuação: ${totalScore} de ${maxScore} pontos.;
             desc.innerText = "Seus níveis de estresse e esgotamento encontram-se dentro da normalidade operacional. Continue monitorando sua rotina e mantendo hábitos saudáveis de desconexão após o expediente.";
-            ctaBox.style.display = "none"; // Não exibe oferta para risco baixo
+            ctaBox.style.display = "none";
         } else if (totalScore <= 22) {
             badge.innerText = "Risco Moderado";
             badge.style.backgroundColor = "#fef3c7";
@@ -163,7 +189,7 @@
             fill.style.backgroundColor = "#f59e0b";
             text.innerText = Pontuação: ${totalScore} de ${maxScore} pontos.;
             desc.innerText = "Atenção. Seus índices apontam para um estado inicial de estresse ocupacional crônico. Sinais de fadiga física e mental começam a interferir na sua qualidade de vida. É recomendável estabelecer limites claros.";
-            ctaBox.style.display = "block"; // Exibe oferta protetiva
+            ctaBox.style.display = "block";
         } else {
             badge.innerText = "Risco Alto / Crítico";
             badge.style.backgroundColor = "#fee2e2";
@@ -171,7 +197,7 @@
             fill.style.backgroundColor = "#ef4444";
             text.innerText = Pontuação: ${totalScore} de ${maxScore} pontos.;
             desc.innerText = "Alerta Vermelho. Seus resultados indicam uma forte compatibilidade com a Síndrome de Burnout (Esgotamento Crônico). Seu corpo e sua mente estão operando no limite de segurança fisiológica. É fundamental buscar apoio técnico e aplicar medidas urgentes de blindagem mental.";
-            ctaBox.style.display = "block"; // Exibe oferta urgente
+            ctaBox.style.display = "block";
         }
     }
 </script>
