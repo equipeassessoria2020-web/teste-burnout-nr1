@@ -24,19 +24,23 @@
         .intro-box { background: #f0f7ff; border-left: 4px solid var(--primary-light); padding: 15px; border-radius: 0 8px 8px 0; margin-bottom: 25px; }
         .intro-box p { font-size: 14px; line-height: 1.5; color: #1e293b; text-align: justify; }
 
-        /* Ajustado para garantir que o JavaScript e o CSS usem o mesmo nome */
-        .question-block { display: none; margin-top: 20px; margin-bottom: 20px; }
-        .question-block.active { display: block !important; }
+        /* Exibe todas as perguntas juntas na página */
+        .question-block { display: block; margin-bottom: 25px; border-bottom: 1px dashed #e2e8f0; padding-bottom: 20px; }
+        .question-block:last-of-type { border-bottom: none; }
         
-        .question-text { font-size: 18px; font-weight: 600; margin-bottom: 15px; color: #1e293b; line-height: 1.4; }
-        .options { display: flex; flex-direction: column; gap: 10px; }
-        button.option-btn { background: #f1f5f9; border: 2px solid #e2e8f0; padding: 14px; border-radius: 8px; text-align: left; font-size: 15px; cursor: pointer; transition: all 0.2s; color: var(--text); font-weight: 500; }
-        button.option-btn:hover { background: #e2e8f0; border-color: var(--primary-light); }
+        .question-text { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #1e293b; line-height: 1.4; }
+        .options { display: flex; flex-direction: column; gap: 8px; }
         
-        .progress-bar { width: 100%; height: 6px; background: #e2e8f0; border-radius: 3px; margin-bottom: 25px; overflow: hidden; }
-        .progress { height: 100%; background: var(--primary-light); width: 0%; transition: width 0.3s; }
+        /* Alinhamento dos botões de seleção (Radio) */
+        .option-label { display: flex; align-items: center; background: #f1f5f9; border: 2px solid #e2e8f0; padding: 12px; border-radius: 8px; font-size: 14px; cursor: pointer; transition: all 0.2s; color: var(--text); font-weight: 500; }
+        .option-label:hover { background: #e2e8f0; }
+        .option-label input { margin-right: 12px; transform: scale(1.2); cursor: pointer; }
         
-        #result-container { display: none; text-align: center; }
+        /* Botão para Calcular o Resultado */
+        .calc-btn { display: block; width: 100%; background: var(--primary); color: white; border: none; padding: 15px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 20px; transition: background 0.2s; text-align: center; }
+        .calc-btn:hover { background: #132b72; }
+        
+        #result-container { display: none; text-align: center; margin-top: 20px; }
         .thermometer-box { margin: 25px 0; background: #f1f5f9; padding: 20px; border-radius: 10px; }
         .thermometer-bar { width: 100%; height: 20px; background: #e2e8f0; border-radius: 10px; overflow: hidden; margin-top: 10px; position: relative; }
         .thermometer-fill { height: 100%; width: 0%; transition: width 1s ease-out; }
@@ -54,7 +58,7 @@
 <body>
 
 <div class="container">
-    <img src="https://images2.imgbox.com/f0/54/tZ7wZgqK_o.png" alt="Simulador de Burnout" class="header-image">
+    <img src="image_0.jpg" alt="Simulador de Burnout" class="header-image">
     
     <div class="content-padding">
         <div id="quiz-container">
@@ -62,11 +66,13 @@
             <p class="subtitle">Diretrizes da NR-1 e Saúde Ocupacional</p>
             
             <div class="intro-box">
-                <p>O esgotamento profissional silencioso destrói carreiras e casamentos antes mesmo dos primeiros sintomas físicos graves aparecerem. De acordo com as diretrizes de saúde da <strong>NR-1</strong>, identificar os sinais iniciais de estresse crônico é o único caminho para proteger sua mente e garantir sua estabilidade. Faça esta avaliação rápida de 5 perguntas e descubra seu nível de risco atual operacional.</p>
+                <p>O esgotamento profissional silencioso destrói carreiras e casamentos antes mesmo dos primeiros sintomas físicos graves aparecerem. De acordo com as diretrizes de saúde da <strong>NR-1</strong>, identificar os sinais iniciais de estresse crônico é o único caminho para proteger sua mente e garantir sua estabilidade. Responda às perguntas abaixo para calcular o seu nível de risco operacional imediato.</p>
             </div>
 
-            <div class="progress-bar"><div class="progress" id="progress"></div></div>
-            <div id="questions-group"></div>
+            <form id="burnout-form" onsubmit="calculateResults(event)">
+                <div id="questions-group"></div>
+                <button type="submit" class="calc-btn">Calcular Meu Nível de Risco</button>
+            </form>
         </div>
 
         <div id="result-container">
@@ -107,54 +113,52 @@
         { text: "Todos os dias constantemente", weight: 6 }
     ];
 
-    let currentQuestion = 0;
-    let totalScore = 0;
     const maxScore = questions.length * 6;
-
     const questionsGroup = document.getElementById('questions-group');
 
-    questions.forEach((q, index) => {
+    // Gera o questionário corrido na tela
+    questions.forEach((q, qIndex) => {
         const qDiv = document.createElement('div');
-        qDiv.className = 'question-block'; // Alinhado com o CSS acima
-        qDiv.id = `q-${index}`;
-        if(index === 0) qDiv.className = 'question-block active';
+        qDiv.className = 'question-block';
         
         const qText = document.createElement('div');
         qText.className = 'question-text';
-        qText.innerText = `${index + 1}. ${q}`;
+        qText.innerText = `${qIndex + 1}. ${q}`;
         qDiv.appendChild(qText);
 
         const optionsDiv = document.createElement('div');
         optionsDiv.className = 'options';
 
-        alternatives.forEach(alt => {
-            const btn = document.createElement('button');
-            btn.className = 'option-btn';
-            btn.innerText = alt.text;
-            btn.onclick = () => handleAnswer(alt.weight);
-            optionsDiv.appendChild(btn);
+        alternatives.forEach((alt, aIndex) => {
+            const label = document.createElement('label');
+            label.className = 'option-label';
+            
+            const radio = document.createElement('input');
+            radio.type = 'radio';
+            radio.name = `question-${qIndex}`;
+            radio.value = alt.weight;
+            radio.required = true; // Obriga a marcar todas as respostas
+            
+            label.appendChild(radio);
+            label.appendChild(document.createTextNode(alt.text));
+            optionsDiv.appendChild(label);
         });
 
         qDiv.appendChild(optionsDiv);
         questionsGroup.appendChild(qDiv);
     });
 
-    function handleAnswer(weight) {
-        totalScore += weight;
-        document.getElementById(`q-${currentQuestion}`).classList.remove('active');
-        currentQuestion++;
-
-        const progressPercent = (currentQuestion / questions.length) * 100;
-        document.getElementById('progress').style.width = `${progressPercent}%`;
-
-        if (currentQuestion < questions.length) {
-            document.getElementById(`q-${currentQuestion}`).classList.add('active');
-        } else {
-            showResults();
+    function calculateResults(event) {
+        event.preventDefault(); // Impede o recarregamento indesejado da página
+        
+        let totalScore = 0;
+        for (let i = 0; i < questions.length; i++) {
+            const selected = document.querySelector(`input[name="question-${i}"]:checked`);
+            if (selected) {
+                totalScore += parseInt(selected.value);
+            }
         }
-    }
 
-    function showResults() {
         document.getElementById('quiz-container').style.display = 'none';
         document.getElementById('result-container').style.display = 'block';
 
