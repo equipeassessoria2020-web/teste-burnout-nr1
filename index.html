@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ferramenta de Triagem - Estresse e Burnout (NR-1)</title>
+    <title>Point da Massa - Marquinhos Pizzaria</title>
     <style>
         * {
             margin: 0;
@@ -12,278 +12,177 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background-color: #f4f6f9;
-            color: #2b2d42;
-            line-height: 1.6;
-            padding-bottom: 3rem;
+            background-color: #f8f9fa;
+            color: #333;
         }
         header {
-            background: linear-gradient(135deg, #1d3557, #457b9d);
+            background: linear-gradient(135deg, #e63946, #1d3557);
             color: white;
             text-align: center;
-            padding: 3rem 1rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 2.5rem 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         header h1 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 0.5rem;
         }
         header p {
             font-size: 1rem;
             opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .badge-nr1 {
-            background-color: #e63946;
-            color: white;
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            margin-top: 0.8rem;
         }
         .container {
-            max-width: 650px;
+            max-width: 600px;
             margin: 2rem auto;
             padding: 0 1rem;
+            padding-bottom: 2rem;
         }
-        .card {
+        .info-box {
             background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-bottom: 1.5rem;
-        }
-        .pergunta {
-            margin-bottom: 1.8rem;
-            border-bottom: 1px solid #edf2f4;
-            padding-bottom: 1.5rem;
-        }
-        .pergunta p {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #1d3557;
-        }
-        .opcoes {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        .opcao {
-            display: flex;
-            align-items: center;
-            background: #f8f9fa;
-            padding: 0.8rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            border: 1px solid #e5e5e5;
-            transition: all 0.2s;
-        }
-        .opcao:hover {
-            background: #edf2f4;
-            border-color: #457b9d;
-        }
-        .opcao input {
-            margin-right: 10px;
-            accent-color: #1d3557;
-        }
-        .btn-enviar {
-            background-color: #e63946;
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 1.2rem;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(230, 57, 70, 0.3);
-            transition: background 0.2s;
-        }
-        .btn-enviar:hover {
-            background-color: #c1121f;
-        }
-        #resultado {
-            display: none;
-        }
-        .resultado-titulo {
-            font-size: 1.5rem;
-            color: #1d3557;
-            margin-bottom: 1rem;
-            text-align: center;
-            font-weight: bold;
-        }
-        .score-box {
-            background: #f1faee;
-            border: 2px dashed #457b9d;
             padding: 1rem;
-            text-align: center;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            color: #1d3557;
-        }
-        .box-download {
-            background-color: #fff;
-            border: 2px solid #1d3557;
             border-radius: 10px;
-            padding: 1.5rem;
-            margin-top: 2rem;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        .box-download h3 {
-            color: #1d3557;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-        .box-download p {
-            color: #333;
-            font-size: 0.95rem;
-            margin-bottom: 1.2rem;
-            line-height: 1.4;
-        }
-        .card-ebook {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            border-left: 5px solid #e63946;
-            text-align: left;
-        }
-        /* Ajuste da imagem para ficar responsiva e bonita */
-        .imagem-ebook {
-            max-width: 100%;
-            height: auto;
-            border-radius: 6px;
             margin-bottom: 1rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 5px solid #e63946;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-        .btn-download {
-            background-color: #e63946;
+        .info-box-pagamento {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #25d366;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .secao-titulo {
+            font-size: 1.4rem;
+            color: #1d3557;
+            margin: 1.5rem 0 1rem 0;
+            border-bottom: 2px solid #e63946;
+            padding-bottom: 0.3rem;
+        }
+        .produto-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .produto-info h3 {
+            font-size: 1.1rem;
+            color: #2b2d42;
+            margin-bottom: 0.2rem;
+        }
+        .produto-info p {
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+        .preco {
+            font-weight: bold;
+            color: #e63946;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            margin-left: 1rem;
+        }
+        /* Ajuste do botão para não cobrir o texto */
+        .area-botao {
+            text-align: center;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .btn-whatsapp {
+            background-color: #25d366;
             color: white;
             text-decoration: none;
-            padding: 1rem 2rem;
+            padding: 1.2rem 2rem;
             border-radius: 50px;
             font-weight: bold;
             font-size: 1.1rem;
-            display: inline-block;
-            box-shadow: 0 4px 10px rgba(230, 57, 70, 0.3);
-            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            justify-content: center;
             transition: background 0.3s;
         }
-        .btn-download:hover {
-            background-color: #c1121f;
+        .btn-whatsapp:hover {
+            background-color: #128c7e;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Triagem de Estresse Ocupacional</h1>
-        <p>Apoio preventivo de bem-estar e riscos psicossociais em conformidade com as diretrizes de saúde do trabalhador.</p>
-        <div class="badge-nr1">Gerenciamento de Riscos - NR-1</div>
+        <h1>Point da Massa</h1>
+        <p>🍕 Marquinhos Pizzaria 🍕</p>
+        <p style="margin-top: 5px; font-size: 0.9rem;">📍 Conj. Habitacional - Itapevi / SP</p>
     </header>
 
     <div class="container">
-        
-        <form id="burnoutForm" class="card" onsubmit="calcularResultado(event)">
-            
-            <div class="pergunta">
-                <p>1. Com que frequência você se sente emocionalmente exausto ou sem energia após o expediente?</p>
-                <div class="opcoes">
-                    <label class="opcao"><input type="radio" name="p1" value="0" required> Raramente ou nunca</label>
-                    <label class="opcao"><input type="radio" name="p1" value="1"> Algumas vezes por mês</label>
-                    <label class="opcao"><input type="radio" name="p1" value="2"> Várias vezes por semana</label>
-                    <label class="opcao"><input type="radio" name="p1" value="3"> Todos os dias</label>
-                </div>
+        <div class="info-box">
+            <p><strong>📞 WhatsApp:</strong> (11) 99149-2436</p>
+            <p style="margin-top: 5px;"><strong>⏰ Horário:</strong> Aberto para Jantar (até 00:00)</p>
+            <p style="margin-top: 5px;"><strong>🛵 Serviços:</strong> Entrega sem contato, Retirada ou Refeição no local</p>
+        </div>
+
+        <div class="info-box-pagamento">
+            <p><strong>💳 Formas de Pagamento:</strong></p>
+            <p style="margin-top: 5px; font-size: 0.9rem; color: #555;">Crédito, Débito, Pix, Alelo, Pluxee, Ticket Restaurante e Vale Refeição.</p>
+        </div>
+
+        <h2 class="secao-titulo">Pizzas Tradicionais</h2>
+
+        <div class="produto-card">
+            <div class="produto-info">
+                <h3>Muçarela</h3>
+                <p>Molho de tomate fresco, muçarela de alta qualidade, rodelas de tomate e azeitonas.</p>
             </div>
+            <div class="preco">R$ 35,00</div>
+        </div>
 
-            <div class="pergunta">
-                <p>2. Você sente que o volume de cobranças ou prazos no trabalho está além do que consegue gerenciar de forma saudável?</p>
-                <div class="opcoes">
-                    <label class="opcao"><input type="radio" name="p2" value="0" required> Não, o ritmo é perfeitamente gerenciável</label>
-                    <label class="opcao"><input type="radio" name="p2" value="1"> Ocasionalmente fica pesado</label>
-                    <label class="opcao"><input type="radio" name="p2" value="2"> Frequentemente me sinto sobrecarregado(a)</label>
-                    <label class="opcao"><input type="radio" name="p2" value="3"> Constantemente, estou sempre no limite</label>
-                </div>
+        <div class="produto-card">
+            <div class="produto-info">
+                <h3>Calabresa</h3>
+                <p>Molho de tomate, calabresa fatiada artesanal, cebola fresca e azeitonas pretas.</p>
             </div>
+            <div class="preco">R$ 35,00</div>
+        </div>
 
-            <div class="pergunta">
-                <p>3. Nos últimos tempos, você percebeu um distanciamento ou desânimo em relação às suas tarefas profissionais?</p>
-                <div class="opcoes">
-                    <label class="opcao"><input type="radio" name="p3" value="0" required> Não, continuo motivado(a)</label>
-                    <label class="opcao"><input type="radio" name="p3" value="1"> Às vezes sinto falta de propósito</label>
-                    <label class="opcao"><input type="radio" name="p3" value="2"> Sim, sinto uma apatia constante com o trabalho</label>
-                    <label class="opcao"><input type="radio" name="p3" value="3"> Sim, perdi totalmente o interesse nas minhas funções</label>
-                </div>
+        <div class="produto-card">
+            <div class="produto-info">
+                <h3>Portuguesa</h3>
+                <p>Presunto, ovos, cebola, ervilha, muçarela e cobertura especial da casa.</p>
             </div>
+            <div class="preco">R$ 40,00</div>
+        </div>
 
-            <button type="submit" class="btn-enviar">Concluir Avaliação</button>
-        </form>
+        <h2 class="secao-titulo">Pizzas Especiais</h2>
 
-        <div id="resultado" class="card">
-            <h2 class="resultado-titulo">Resultado da sua Análise</h2>
-            
-            <div class="score-box" id="scoreTexto">
-                Pontuação: 0 de 9
+        <div class="produto-card">
+            <div class="produto-info">
+                <h3>Frango com Catupiry</h3>
+                <p>Frango desfiado temperado coberto com o legítimo Catupiry cremoso.</p>
             </div>
+            <div class="preco">R$ 42,00</div>
+        </div>
 
-            <p id="feedbackTexto" style="margin-bottom: 1.5rem; text-align: center; color: #555;"></p>
-
-            <div class="box-download">
-                <h3>📖 Adquira Conhecimento e Proteção</h3>
-                <p>
-                    Para entender a fundo os seus direitos e aprender a aplicar as diretrizes da <strong>NR-1</strong> a favor da sua saúde mental, tenha acesso ao nosso material completo.
-                </p>
-                
-                <img src="image_0.jpeg" alt="Capa do Ebook" class="imagem-ebook">
-                
-                <div class="card-ebook">
-                    <p style="margin: 0; font-weight: bold; color: #1d3557;">📚 E-book: Guia Prático de Combate ao Estresse Ocupacional</p>
-                    <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: #555;">Descubra como a legislação protege o trabalhador contra o esgotamento e saiba exatamente como agir para garantir um ambiente profissional seguro e saudável.</p>
-                </div>
-
-                <a href="https://pay.kiwify.com.br" target="_blank" class="btn-download">
-                    Acessar E-book Completo
-                </a>
+        <div class="produto-card">
+            <div class="produto-info">
+                <h3>Quatro Queijos</h3>
+                <p>Uma combinação perfeita de muçarela, catupiry, provolone e gorgonzola.</p>
             </div>
+            <div class="preco">R$ 45,00</div>
+        </div>
+
+        <div class="area-botao">
+            <a href="https://wa.me/5511991492436?text=Ol%C3%A1%20Marquinhos%2C%20vi%20o%20seu%20card%C3%A1pio%20digital%20e%20gostaria%20de%20fazer%20um%20pedido!" class="btn-whatsapp" target="_blank">
+                📱 Fazer Pedido no WhatsApp
+            </a>
         </div>
 
     </div>
 
-    <script>
-        function calcularResultado(event) {
-            event.preventDefault();
-            
-            const p1 = parseInt(document.querySelector('input[name="p1"]:checked').value);
-            const p2 = parseInt(document.querySelector('input[name="p2"]:checked').value);
-            const p3 = parseInt(document.querySelector('input[name="p3"]:checked').value);
-            
-            const total = p1 + p2 + p3;
-            
-            document.getElementById('burnoutForm').style.display = 'none';
-            document.getElementById('resultado').style.display = 'block';
-            
-            const scoreTexto = document.getElementById('scoreTexto');
-            const feedbackTexto = document.getElementById('feedbackTexto');
-            
-            scoreTexto.innerText = "Pontuação Total: " + total + " de 9";
-            
-            if (total <= 3) {
-                feedbackTexto.innerText = "Seus níveis de estresse ocupacional encontram-se dentro da faixa considerada estável e segura. Continue monitorando sua rotina profissional e mantendo hábitos saudáveis de equilíbrio entre vida pessoal e trabalho.";
-            } else if (total <= 6) {
-                feedbackTexto.innerText = "Atenção: Seus índices de esgotamento apresentam sinais de alerta moderados. Sugere-se revisar a distribuição de tarefas, estabelecer pausas estratégicas e buscar práticas de desaceleração na rotina laboral.";
-            } else {
-                feedbackTexto.innerText = "Alerta Crítico: Seus resultados apontam um nível elevado de desgaste físico e mental compatível com estresse crônico. Recomenda-se acompanhamento especializado e a implementação imediata de medidas corporativas de suporte psicossocial.";
-            }
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    </script>
 </body>
 </html>
