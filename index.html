@@ -3,370 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaliação de Saúde Mental e Riscos Psicossociais - NR-1</title>
+    <title>Simulador de Burnout e Estresse - NR-1</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #3b82f6;
+            --bg: #f8fafc;
+            --text: #334155;
         }
-        body {
-            background-color: #f4f6f9;
-            color: #2b2d42;
-            line-height: 1.6;
-            padding-bottom: 3rem;
-        }
-        header {
-            background: linear-gradient(135deg, #1d3557, #457b9d);
-            color: white;
-            text-align: center;
-            padding: 3rem 1rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-        }
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        .badge-nr1 {
-            background-color: #e63946;
-            color: white;
-            display: inline-block;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            margin-top: 1rem;
-            letter-spacing: 1px;
-        }
-        .container {
-            max-width: 700px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-        .card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin-bottom: 1.5rem;
-        }
-        .instrucoes {
-            background-color: #edf2f4;
-            border-left: 5px solid #457b9d;
-            padding: 1rem;
-            border-radius: 4px;
-            margin-bottom: 2rem;
-            font-size: 0.95rem;
-            color: #1d3557;
-        }
-        .pergunta {
-            margin-bottom: 2rem;
-            border-bottom: 1px solid #edf2f4;
-            padding-bottom: 1.5rem;
-        }
-        .pergunta p {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 1.2rem;
-            color: #1d3557;
-        }
-        .opcoes {
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-        }
-        .opcao {
-            display: flex;
-            align-items: center;
-            background: #f8f9fa;
-            padding: 0.9rem 1.2rem;
-            border-radius: 8px;
-            cursor: pointer;
-            border: 1px solid #e5e5e5;
-            transition: all 0.2s ease;
-        }
-        .opcao:hover {
-            background: #edf2f4;
-            border-color: #457b9d;
-        }
-        .opcao input {
-            margin-right: 12px;
-            transform: scale(1.2);
-            accent-color: #1d3557;
-        }
-        .btn-enviar {
-            background-color: #e63946;
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 1.2rem;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
-            transition: background 0.2s;
-        }
-        .btn-enviar:hover {
-            background-color: #c1121f;
-        }
-        #resultado {
-            display: none;
-        }
-        .resultado-titulo {
-            font-size: 1.6rem;
-            color: #1d3557;
-            margin-bottom: 1.2rem;
-            text-align: center;
-            font-weight: bold;
-        }
-        .score-box {
-            background: #f1faee;
-            border: 2px dashed #457b9d;
-            padding: 1.2rem;
-            text-align: center;
-            font-size: 1.3rem;
-            font-weight: bold;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            color: #1d3557;
-        }
-        .box-download {
-            background-color: #fff;
-            border: 2px solid #1d3557;
-            border-radius: 10px;
-            padding: 2rem;
-            margin-top: 2.5rem;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-        .box-download h3 {
-            color: #1d3557;
-            font-size: 1.4rem;
-            margin-bottom: 0.8rem;
-        }
-        .box-download p {
-            color: #333;
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
-        }
-        .imagem-ebook {
-            max-width: 260px;
-            height: auto;
-            border-radius: 8px;
-            margin: 0 auto 1.5rem auto;
-            display: block;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
-        .card-ebook {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 1.2rem;
-            margin-bottom: 1.5rem;
-            border-left: 5px solid #e63946;
-            text-align: left;
-        }
-        .btn-download {
-            background-color: #e63946;
-            color: white;
-            text-decoration: none;
-            padding: 1.1rem 2.5rem;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.15rem;
-            display: inline-block;
-            box-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
-            transition: background 0.3s;
-        }
-        .btn-download:hover {
-            background-color: #c1121f;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg); color: var(--text); padding: 15px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .container { background: white; max-width: 600px; width: 100%; padding: 0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); overflow: hidden; }
+        
+        .header-image { width: 100%; height: auto; display: block; object-fit: cover; border-bottom: 3px solid var(--primary-light); }
+        .content-padding { padding: 25px; }
+        
+        h1 { color: var(--primary); font-size: 24px; margin-bottom: 10px; text-align: center; font-weight: 700; }
+        p.subtitle { text-align: center; font-size: 13px; color: #64748b; margin-bottom: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .intro-box { background: #f0f7ff; border-left: 4px solid var(--primary-light); padding: 15px; border-radius: 0 8px 8px 0; margin-bottom: 25px; }
+        .intro-box p { font-size: 14px; line-height: 1.5; color: #1e293b; text-align: justify; }
+
+        .question-block { display: block; margin-bottom: 25px; border-bottom: 1px dashed #e2e8f0; padding-bottom: 20px; }
+        .question-block:last-of-type { border-bottom: none; }
+        
+        .question-text { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #1e293b; line-height: 1.4; }
+        .options { display: flex; flex-direction: column; gap: 8px; }
+        
+        .option-label { display: flex; align-items: center; background: #f1f5f9; border: 2px solid #e2e8f0; padding: 12px; border-radius: 8px; font-size: 14px; cursor: pointer; transition: all 0.2s; color: var(--text); font-weight: 500; }
+        .option-label:hover { background: #e2e8f0; }
+        .option-label input { margin-right: 12px; transform: scale(1.2); cursor: pointer; }
+        
+        .calc-btn { display: block; width: 100%; background: var(--primary); color: white; border: none; padding: 15px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 20px; transition: background 0.2s; text-align: center; }
+        .calc-btn:hover { background: #132b72; }
+        
+        #result-container { display: none; text-align: center; margin-top: 20px; }
+        .thermometer-box { margin: 25px 0; background: #f1f5f9; padding: 20px; border-radius: 10px; }
+        .thermometer-bar { width: 100%; height: 20px; background: #e2e8f0; border-radius: 10px; overflow: hidden; margin-top: 10px; position: relative; }
+        .thermometer-fill { height: 100%; width: 0%; transition: width 1s ease-out; }
+        .status-badge { display: inline-block; padding: 6px 16px; border-radius: 20px; font-weight: bold; font-size: 18px; margin-top: 10px; }
+        
+        .cta-box { display: none; margin-top: 30px; padding: 20px; border: 2px dashed #34d399; background: #ecfdf5; border-radius: 10px; }
+        .cta-title { font-size: 18px; font-weight: bold; color: #065f46; margin-bottom: 10px; }
+        .cta-text { font-size: 14px; color: #047857; margin-bottom: 15px; text-align: justify; line-height: 1.5; }
+        .buy-btn { display: inline-block; background: #10b981; color: white; text-decoration: none; padding: 14px 28px; font-weight: bold; font-size: 18px; border-radius: 8px; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); transition: all 0.2s; margin-top: 5px; }
+        .buy-btn:hover { background: #059669; transform: scale(1.03); }
+        
+        .footer-note { font-size: 11px; color: #94a3b8; margin-top: 30px; text-align: center; line-height: 1.4; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Triagem de Estresse Ocupacional e Burnout</h1>
-        <p>Apoio preventivo de bem-estar e riscos psicossociais em conformidade com as diretrizes de saúde do trabalhador.</p>
-        <div class="badge-nr1">DIRETRIZES DA NR-1</div>
-    </header>
-
-    <div class="container">
-        
-        <form id="burnoutForm" class="card" onsubmit="calcularResultado(event)">
-            <div class="instrucoes">
-                <strong>Instruções:</strong> Responda às questões abaixo com base nos seus sentimentos e rotina de trabalho nos últimos meses. A sua participação ajuda a identificar precocemente sinais de esgotamento.
-            </div>
+<div class="container">
+    <img src="image_0.jpeg" alt="Simulador de Burnout" class="header-image">
+    
+    <div class="content-padding">
+        <div id="quiz-container">
+            <h1>Simulador de Burnout e Estresse</h1>
+            <p class="subtitle">Diretrizes da NR-1 e Saúde Ocupacional</p>
             
-            <div class="pergunta">
-                <p>1. Com que frequência sente exaustão física ou mental extrema logo no início ou após a jornada de trabalho?</p>
-                <div class="opcoes">
-                    <label class="opcao"><input type="radio" name="p1" value="0" required> Raramente ou nunca</label>
-                    <label class="opcao"><input type="radio" name="p1" value="1"> Algumas vezes por mês</label>
-                    <label class="opcao"><input type="radio" name="p1" value="2"> Várias vezes por semana</label>
-                    <label class="opcao"><input type="radio" name="p1" value="3"> Diariamente</label>
-                </div>
+            <div class="intro-box">
+                <p>O esgotamento profissional silencioso destrói carreiras e casamentos antes mesmo dos primeiros sintomas físicos graves aparecerem. De acordo com as diretrizes de saúde da <strong>NR-1</strong>, identificar os sinais iniciais de estresse crônico é o único caminho para proteger sua mente e garantir sua estabilidade. Responda às perguntas abaixo para calcular o seu nível de risco operacional imediato.</p>
             </div>
 
-            <div class="pergunta">
-                <p>2. Sente que o volume de prazos, metas ou exigências laborais ultrapassa a sua capacidade de gestão saudável?</p>
-                <div class="opcoes">
-                    <label class="opcao"><input type="radio" name="p2" value="0" required> Não, o ritmo é totalmente equilibrado</label>
-                    <label class="opcao"><input type="radio" name="p2" value="1"> Ocasionalmente sinto sobrecarga</label>
-                    <label class="opcao"><input type="radio" name="p2" value="2"> Frequentemente sinto que estou no limite</label>
-                    <label class="opcao"><input type="radio" name="p2" value="3"> Constantemente acima do que consigo tolerar</label>
-                </div>
-            </div>
-
-            <div class="pergunta">
-                <p>3. Tem sentido dificuldades acentuadas em desligar-se mentalmente das obrigações profissionais nas suas horas de descanso?</p>
-                <div class="opcoes">
-                    <label class="opcao"><input type="radio" name="p3" value="0" required> Não, desligo-me com facilidade</label>
-                    <label class="opcao"><input type="radio" name="p3" value="1"> Às vezes penso em problemas do trabalho</label>
-                    <label class="opcao"><input type="radio" name="p3" value="2"> Frequentemente passo o descanso preocupado</label>
-                    <label class="opcao"><input type="radio" name="p3" value="3"> Nunca consigo desligar-me do ambiente corporativo</label>
-                </div>
-            </div>
-
-            <div class="pergunta">
-                <p>4. Notou um distanciamento afetivo, apatia ou sentimentos mais cínicos e negativos em relação às suas tarefas?</p>
-                <div class="opcoes">
-                    <label class="opcao"><input type="radio" name="p4" value="0" required> Não, mantenho a motivação e empatia</label>
-                    <label class="opcao"><input type="radio" name="p4" value="1"> Raramente sinto indiferença</label>
-                    <label class="opcao"><input type="radio" name="p4" value="2"> Sim, sinto desânimo frequente com o ambiente</label>
-                    <label class="opcao"><input type="radio" name="p4" value="3"> Totalmente apático(a) e sem perspetivas na função</label>
-                </div>
-            </div>
-
-            <div class="pergunta">
-                <p>5. O estresse gerado no trabalho tem provocado sintomas físicos frequentes (como dores de cabeça, insónia ou tensões)?</p>
-                <div class="opcoes">
-                    <label class="opcao"><input type="radio" name="p5" value="0" required> Não apresento queixas físicas</label>
-                    <label class="opcao"><input type="radio" name="p5" value="1"> Sinto dores ou insónia esporádicas</label>
-                    <label class="opcao"><input type="radio" name="p5" value="2"> Sim, as queixas físicas têm sido comuns</label>
-                    <label class="opcao"><input type="radio" name="p5" value="3"> Sim, sofro com dores intensas e distúrbios de sono constantes</label>
-                </div>
-            </div>
-
-            <div class="pergunta">
-                <p>6. Sente uma perda de autoconfiança profissional ou a sensação de que os seus esforços não geram resultados?</p>
-                <div class="opcoes">
-                    <label class="opcao"><input type="radio" name="p6" value="0" required> Não, sinto-me produtivo(a) e seguro(a)</label>
-                    <label class="opcao"><input type="radio" name="p6" value="1"> Ocasionalmente duvido do meu rendimento</label>
-                    <label class="opcao"><input type="radio" name="p6" value="2"> Frequentemente sinto ineficácia nas ações</label>
-                    <label class="opcao"><input type="radio" name="p6" value="3"> Sinto total frustração e incapacidade produtiva</label>
-                </div>
-            </div>
-
-            <div class="pergunta">
-                <p>7. Nota irritabilidade excessiva, impaciência ou alterações de humor bruscas com colegas de equipa ou clientes?</p>
-                <div class="opcoes">
-                    <label class="opcao"><input type="radio" name="p7" value="0" required> Não, mantenho o autocontrolo tranquilo</label>
-                    <label class="opcao"><input type="radio" name="p7" value="1"> Às vezes sou um pouco mais ríspido(a)</label>
-                    <label class="opcao"><input type="radio" name="p7" value="2"> Sinto atritos e impaciência constantes no setor</label>
-                    <label class="opcao"><input type="radio" name="p7" value="3"> Estou em conflito permanente ou evito qualquer contacto</label>
-                </div>
-            </div>
-
-            <div class="pergunta">
-                <p>8. Percebe lapsos de memória recorrentes, falta de foco ou lentidão para tomar decisões simples na rotina?</p>
-                <div class="opcoes">
-                    <label class="opcao"><input type="radio" name="p8" value="0" required> Concentração normal e raciocínio ágil</label>
-                    <label class="opcao"><input type="radio" name="p8" value="1"> Lapsos muito esporádicos</label>
-                    <label class="opcao"><input type="radio" name="p8" value="2"> Dificuldade clara em focar das demandas</label>
-                    <label class="opcao"><input type="radio" name="p8" value="3"> Bloqueio mental frequente e incapacidade de foco</label>
-                </div>
-            </div>
-
-            <div class="pergunta">
-                <p>9. Sente falta de suporte, falta de autonomia ou injustiça nas decisões da liderança da organização?</p>
-                <div class="opcoes">
-                    <label class="opcao"><input type="radio" name="p9" value="0" required> Sinto-me apoiado(a) e valorizado(a)</label>
-                    <label class="opcao"><input type="radio" name="p9" value="1"> O suporte falha poucas vezes</label>
-                    <label class="opcao"><input type="radio" name="p9" value="2"> O ambiente apresenta falhas graves de apoio</label>
-                    <label class="opcao"><input type="radio" name="p9" value="3"> Total desamparo e falta de reconhecimento dos gestores</label>
-                </div>
-            </div>
-
-            <div class="pergunta">
-                <p>10. O cansaço acumulado faz com que sinta vontade de faltar ao emprego ou abandonar a sua carreira atual?</p>
-                <div class="opcoes">
-                    <label class="opcao"><input type="radio" name="p10" value="0" required> Não, estou comprometido(a) com a minha trajetória</label>
-                    <label class="opcao"><input type="radio" name="p10" value="1"> Pensei nisso em momentos de picos de estresse</label>
-                    <label class="opcao"><input type="radio" name="p10" value="2"> Penso nisso com bastante frequência semanal</label>
-                    <label class="opcao"><input type="radio" name="p10" value="3"> É o meu desejo principal, não suporto a rotina atual</label>
-                </div>
-            </div>
-
-            <button type="submit" class="btn-enviar">Concluir Avaliação</button>
-        </form>
-
-        <div id="resultado" class="card">
-            <h2 class="resultado-titulo">Resultado da Análise Preliminar</h2>
-            
-            <div class="score-box" id="scoreTexto">
-                Pontuação Total: 0 de 30
-            </div>
-
-            <p id="feedbackTexto" style="margin-bottom: 1.5rem; text-align: center; color: #4a5568; font-size: 1.05rem;"></p>
-
-            <div class="box-download">
-                <h3>📖 Adquira Conhecimento e Proteção Legal</h3>
-                <p>
-                    Para compreender profundamente a sua situação, conhecer os seus direitos fundamentais e saber como aplicar as regras da <strong>NR-1</strong> a favor da sua integridade física e mental, aceda ao nosso guia especializado.
-                </p>
-                
-                <img src="image_0.jpeg" alt="Capa do E-book Guia Prático" class="imagem-ebook">
-                
-                <div class="card-ebook">
-                    <p style="margin: 0; font-weight: bold; color: #1d3557;">📚 E-book: Guia Prático de Combate ao Estresse Ocupacional</p>
-                    <p style="margin: 5px 0 0 0; font-size: 0.9rem; color: #555;">Aprenda a mapear os riscos, conheça os limites da lei que resguarda o trabalhador de abusos e proteja-se ativamente contra o esgotamento no meio profissional.</p>
-                </div>
-
-                <a href="https://www.hotmart.com" target="_blank" class="btn-download">
-                    Acessar Conteúdo Completo
-                </a>
-            </div>
+            <form id="burnout-form" onsubmit="calculateResults(event)">
+                <div id="questions-group"></div>
+                <button type="submit" class="calc-btn">Calcular Meu Nível de Risco</button>
+            </form>
         </div>
 
-    </div>
+        <div id="result-container">
+            <h1>Seu Resultado</h1>
+            <div class="thermometer-box">
+                <p id="result-text" style="font-size: 16px; font-weight: 500;"></p>
+                <div class="status-badge" id="status-badge"></div>
+                <div class="thermometer-bar">
+                    <div class="thermometer-fill" id="thermometer-fill"></div>
+                </div>
+            </div>
+            <p id="result-desc" style="line-height: 1.5; color: #475569; margin-bottom: 20px; text-align: justify;"></p>
+            
+            <div class="cta-box" id="cta-box">
+                <p class="cta-title">📘 Precisa de Ajuda Prática Imediata?</p>
+                <p class="cta-text">Baixe agora o <strong>Manual de Sobrevivência ao Burnout e ao Estresse</strong> e aprenda técnicas discretas para controlar a ansiedade e impor limites saudáveis no trabalho sem risco de demissão.</p>
+                <a href="https://go.hotmart.com/B105978148W" target="_blank" class="buy-btn">Quero o Manual Prático</a>
+            </div>
 
-    <script>
-        function calcularResultado(event) {
-            event.preventDefault();
+            <p class="footer-note">Aviso: Este simulador é uma ferramenta de triagem educativa baseada no Inventário de Burnout de Maslach (MBI) e apoio à NR-1. Não substitui consulta ou diagnóstico médico/psicológico profissional.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        "Com que frequência você se sente emocionalmente exausto devido ao trabalho?",
+        "Com que frequência você sente que seu sono não é suficiente para recuperar as energias?",
+        "Com que frequência você sente ansiedade ou aperto no peito ao pensar no expediente (especialmente aos domingos)?",
+        "Com que frequência você percebe que perde a paciência facilmente com colegas, chefes ou familiares?",
+        "Com que frequência você sente que, por mais que trabalhe, suas demandas nunca diminuem?"
+    ];
+
+    const alternatives = [
+        { text: "Raramente ou Nunca", weight: 1 },
+        { text: "Algumas vezes por mês", weight: 2 },
+        { text: "Algumas vezes por semana", weight: 4 },
+        { text: "Todos os dias constantemente", weight: 6 }
+    ];
+
+    const maxScore = questions.length * 6;
+    const questionsGroup = document.getElementById('questions-group');
+
+    questions.forEach((q, qIndex) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = 'question-block';
+        
+        const qText = document.createElement('div');
+        qText.className = 'question-text';
+        qText.innerText = `${qIndex + 1}. ${q}`;
+        qDiv.appendChild(qText);
+
+        const optionsDiv = document.createElement('div');
+        optionsDiv.className = 'options';
+
+        alternatives.forEach((alt, aIndex) => {
+            const label = document.createElement('label');
+            label.className = 'option-label';
             
-            let total = 0;
-            for (let i = 1; i <= 10; i++) {
-                const valor = document.querySelector('input[name="p' + i + '"]:checked').value;
-                total += parseInt(valor);
+            const radio = document.createElement('input');
+            radio.type = 'radio';
+            radio.name = `question-${qIndex}`;
+            radio.value = alt.weight;
+            radio.required = true;
+            
+            label.appendChild(radio);
+            label.appendChild(document.createTextNode(alt.text));
+            optionsDiv.appendChild(label);
+        });
+
+        qDiv.appendChild(optionsDiv);
+        questionsGroup.appendChild(qDiv);
+    });
+
+    function calculateResults(event) {
+        event.preventDefault();
+        
+        let totalScore = 0;
+        for (let i = 0; i < questions.length; i++) {
+            const selected = document.querySelector(`input[name="question-${i}"]:checked`);
+            if (selected) {
+                totalScore += parseInt(selected.value);
             }
-            
-            document.getElementById('burnoutForm').style.display = 'none';
-            document.getElementById('resultado').style.display = 'block';
-            
-            const scoreTexto = document.getElementById('scoreTexto');
-            const feedbackTexto = document.getElementById('feedbackTexto');
-            
-            scoreTexto.innerText = "Pontuação Total: " + total + " de 30";
-            
-            if (total <= 10) {
-                feedbackTexto.innerText = "Nível Baixo / Estável: Os seus indicadores psicossociais encontram-se dentro de parâmetros de normalidade e controle. Mantenha práticas contínuas de equilíbrio e prevenção ativa na sua organização.";
-            } else if (total <= 20) {
-                feedbackTexto.innerText = "Nível Moderado / Alerta: Foram registados sinais evidentes de desgaste associados à rotina profissional. Recomenda-se reavaliar a distribuição de demandas, pausas e estratégias de apoio psicossocial no ambiente corporativo.";
-            } else {
-                feedbackTexto.innerText = "Nível Crítico / Alto Risco: Os dados demonstram índices agudos de esgotamento físico e mental equivalentes ao quadro severo de estresse crónico. É altamente aconselhável suporte profissional e intervenções de segurança do trabalho conforme preconiza a NR-1.";
-            }
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-    </script>
+
+        document.getElementById('quiz-container').style.display = 'none';
+        document.getElementById('result-container').style.display = 'block';
+
+        const finalPercent = (totalScore / maxScore) * 100;
+        const fill = document.getElementById('thermometer-fill');
+        const badge = document.getElementById('status-badge');
+        const text = document.getElementById('result-text');
+        const desc = document.getElementById('result-desc');
+        const ctaBox = document.getElementById('cta-box');
+
+        setTimeout(() => { fill.style.width = `${finalPercent}%`; }, 100);
+
+        if (totalScore <= 12) {
+            badge.innerText = "Risco Baixo";
+            badge.style.backgroundColor = "#d1fae5";
+            badge.style.color = "#065f46";
+            fill.style.backgroundColor = "#10b981";
+            text.innerText = `Pontuação: ${totalScore} de ${maxScore} pontos.`;
+            desc.innerText = "Seus níveis de estresse e esgotamento encontram-se dentro da normalidade operacional. Continue monitorando sua rotina e mantendo hábitos saudáveis de desconexão após o expediente.";
+            ctaBox.style.display = "none";
+        } else if (totalScore <= 22) {
+            badge.innerText = "Risco Moderado";
+            badge.style.backgroundColor = "#fef3c7";
+            badge.style.color = "#92400e";
+            fill.style.backgroundColor = "#f59e0b";
+            text.innerText = `Pontuação: ${totalScore} de ${maxScore} pontos.`;
+            desc.innerText = "Atenção. Seus índices apontam para um estado inicial de estresse ocupacional crônico. Sinais de fadiga física e mental começam a interferir na sua qualidade de vida. É recomendável estabelecer limites claros.";
+            ctaBox.style.display = "block";
+        } else {
+            badge.innerText = "Risco Alto / Crítico";
+            badge.style.backgroundColor = "#fee2e2";
+            badge.style.color = "#991b1b";
+            fill.style.backgroundColor = "#ef4444";
+            text.innerText = `Pontuação: ${totalScore} de ${maxScore} pontos.`;
+            desc.innerText = "Alerta Vermelho. Seus resultados indicam uma forte compatibilidade com a Síndrome de Burnout (Esgotamento Crônico). Seu corpo e sua mente estão operando no limite de segurança fisiológica. É fundamental buscar apoio técnico e aplicar medidas urgentes diárias.";
+            ctaBox.style.display = "block";
+        }
+    }
+</script>
+
 </body>
 </html>
