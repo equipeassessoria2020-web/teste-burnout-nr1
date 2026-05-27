@@ -146,8 +146,6 @@
             text-align: center;
             font-weight: bold;
         }
-        
-        /* Caixa de pontuação base (as cores específicas vão entrar via JavaScript) */
         .score-box {
             padding: 1.5rem;
             text-align: center;
@@ -156,6 +154,19 @@
             border-radius: 8px;
             margin-bottom: 1.5rem;
             transition: all 0.3s ease;
+        }
+        
+        /* Estilo para a Nota Profissional Importante */
+        .nota-profissional {
+            background-color: #f8f9fa;
+            border: 1px dashed #6c757d;
+            color: #495057;
+            padding: 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
         }
         
         .box-download {
@@ -340,7 +351,11 @@
                 Pontuação Total: 0 de 30
             </div>
 
-            <p id="feedbackTexto" style="margin-bottom: 1.5rem; text-align: center; color: #4a5568; font-size: 1.05rem;"></p>
+            <p id="feedbackTexto" style="margin-bottom: 1rem; text-align: center; color: #4a5568; font-size: 1.05rem;"></p>
+
+            <div class="nota-profissional">
+                <strong>Nota Importante:</strong> Esta triagem é uma análise estatística preliminar de caráter meramente informativo e educativo. Ela <u>não substitui</u> em hipótese alguma uma consulta, diagnóstico ou parecer de um psicólogo, psiquiatra ou médico do trabalho devidamente habilitado.
+            </div>
 
             <div class="box-download">
                 <h3>🎁 Ganhe Mais Conhecimento</h3>
@@ -381,21 +396,17 @@
             
             scoreTexto.innerText = "Pontuação Total: " + total + " de 30";
             
-            // Lógica de Cores Dinâmicas conforme o Resultado
             if (total <= 10) {
-                // VERDE: Nível Estável
                 scoreTexto.style.backgroundColor = "#d8f3dc";
                 scoreTexto.style.color = "#1b4332";
                 scoreTexto.style.border = "2px solid #52b788";
                 feedbackTexto.innerText = "Nível Baixo / Estável: Os seus indicadores psicossociais encontram-se dentro de parâmetros de normalidade e controle. Mantenha práticas contínuas de equilíbrio e prevenção ativa na sua organização.";
             } else if (total <= 20) {
-                // AMARELO: Alerta
                 scoreTexto.style.backgroundColor = "#fefae0";
                 scoreTexto.style.color = "#606c38";
                 scoreTexto.style.border = "2px solid #dda15e";
                 feedbackTexto.innerText = "Nível Moderado / Alerta: Foram registados sinais evidentes de desgaste associados à rotina profissional. Recomenda-se reavaliar a distribuição de demandas, pausas e estratégias de apoio psicossocial no ambiente corporativo.";
             } else {
-                // VERMELHO: Crítico
                 scoreTexto.style.backgroundColor = "#f8d7da";
                 scoreTexto.style.color = "#842029";
                 scoreTexto.style.border = "2px solid #f5c2c7";
