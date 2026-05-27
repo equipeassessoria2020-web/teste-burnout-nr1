@@ -127,7 +127,6 @@
             margin-bottom: 1.5rem;
             color: #1d3557;
         }
-        /* AJUSTE DO BLOCO FOCADO EM CONHECIMENTO E NA LEI QUE PROTEGE O TRABALHADOR */
         .box-download {
             background-color: #fff;
             border: 2px solid #1d3557;
@@ -156,6 +155,14 @@
             border-left: 5px solid #e63946;
             text-align: left;
         }
+        /* Ajuste da imagem para ficar responsiva e bonita */
+        .imagem-ebook {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
         .btn-download {
             background-color: #e63946;
             color: white;
@@ -166,6 +173,7 @@
             font-size: 1.1rem;
             display: inline-block;
             box-shadow: 0 4px 10px rgba(230, 57, 70, 0.3);
+            cursor: pointer;
             transition: background 0.3s;
         }
         .btn-download:hover {
@@ -179,3 +187,103 @@
         <h1>Triagem de Estresse Ocupacional</h1>
         <p>Apoio preventivo de bem-estar e riscos psicossociais em conformidade com as diretrizes de saúde do trabalhador.</p>
         <div class="badge-nr1">Gerenciamento de Riscos - NR-1</div>
+    </header>
+
+    <div class="container">
+        
+        <form id="burnoutForm" class="card" onsubmit="calcularResultado(event)">
+            
+            <div class="pergunta">
+                <p>1. Com que frequência você se sente emocionalmente exausto ou sem energia após o expediente?</p>
+                <div class="opcoes">
+                    <label class="opcao"><input type="radio" name="p1" value="0" required> Raramente ou nunca</label>
+                    <label class="opcao"><input type="radio" name="p1" value="1"> Algumas vezes por mês</label>
+                    <label class="opcao"><input type="radio" name="p1" value="2"> Várias vezes por semana</label>
+                    <label class="opcao"><input type="radio" name="p1" value="3"> Todos os dias</label>
+                </div>
+            </div>
+
+            <div class="pergunta">
+                <p>2. Você sente que o volume de cobranças ou prazos no trabalho está além do que consegue gerenciar de forma saudável?</p>
+                <div class="opcoes">
+                    <label class="opcao"><input type="radio" name="p2" value="0" required> Não, o ritmo é perfeitamente gerenciável</label>
+                    <label class="opcao"><input type="radio" name="p2" value="1"> Ocasionalmente fica pesado</label>
+                    <label class="opcao"><input type="radio" name="p2" value="2"> Frequentemente me sinto sobrecarregado(a)</label>
+                    <label class="opcao"><input type="radio" name="p2" value="3"> Constantemente, estou sempre no limite</label>
+                </div>
+            </div>
+
+            <div class="pergunta">
+                <p>3. Nos últimos tempos, você percebeu um distanciamento ou desânimo em relação às suas tarefas profissionais?</p>
+                <div class="opcoes">
+                    <label class="opcao"><input type="radio" name="p3" value="0" required> Não, continuo motivado(a)</label>
+                    <label class="opcao"><input type="radio" name="p3" value="1"> Às vezes sinto falta de propósito</label>
+                    <label class="opcao"><input type="radio" name="p3" value="2"> Sim, sinto uma apatia constante com o trabalho</label>
+                    <label class="opcao"><input type="radio" name="p3" value="3"> Sim, perdi totalmente o interesse nas minhas funções</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-enviar">Concluir Avaliação</button>
+        </form>
+
+        <div id="resultado" class="card">
+            <h2 class="resultado-titulo">Resultado da sua Análise</h2>
+            
+            <div class="score-box" id="scoreTexto">
+                Pontuação: 0 de 9
+            </div>
+
+            <p id="feedbackTexto" style="margin-bottom: 1.5rem; text-align: center; color: #555;"></p>
+
+            <div class="box-download">
+                <h3>📖 Adquira Conhecimento e Proteção</h3>
+                <p>
+                    Para entender a fundo os seus direitos e aprender a aplicar as diretrizes da <strong>NR-1</strong> a favor da sua saúde mental, tenha acesso ao nosso material completo.
+                </p>
+                
+                <img src="image_0.jpeg" alt="Capa do Ebook" class="imagem-ebook">
+                
+                <div class="card-ebook">
+                    <p style="margin: 0; font-weight: bold; color: #1d3557;">📚 E-book: Guia Prático de Combate ao Estresse Ocupacional</p>
+                    <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: #555;">Descubra como a legislação protege o trabalhador contra o esgotamento e saiba exatamente como agir para garantir um ambiente profissional seguro e saudável.</p>
+                </div>
+
+                <a href="https://pay.kiwify.com.br" target="_blank" class="btn-download">
+                    Acessar E-book Completo
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function calcularResultado(event) {
+            event.preventDefault();
+            
+            const p1 = parseInt(document.querySelector('input[name="p1"]:checked').value);
+            const p2 = parseInt(document.querySelector('input[name="p2"]:checked').value);
+            const p3 = parseInt(document.querySelector('input[name="p3"]:checked').value);
+            
+            const total = p1 + p2 + p3;
+            
+            document.getElementById('burnoutForm').style.display = 'none';
+            document.getElementById('resultado').style.display = 'block';
+            
+            const scoreTexto = document.getElementById('scoreTexto');
+            const feedbackTexto = document.getElementById('feedbackTexto');
+            
+            scoreTexto.innerText = "Pontuação Total: " + total + " de 9";
+            
+            if (total <= 3) {
+                feedbackTexto.innerText = "Seus níveis de estresse ocupacional encontram-se dentro da faixa considerada estável e segura. Continue monitorando sua rotina profissional e mantendo hábitos saudáveis de equilíbrio entre vida pessoal e trabalho.";
+            } else if (total <= 6) {
+                feedbackTexto.innerText = "Atenção: Seus índices de esgotamento apresentam sinais de alerta moderados. Sugere-se revisar a distribuição de tarefas, estabelecer pausas estratégicas e buscar práticas de desaceleração na rotina laboral.";
+            } else {
+                feedbackTexto.innerText = "Alerta Crítico: Seus resultados apontam um nível elevado de desgaste físico e mental compatível com estresse crônico. Recomenda-se acompanhamento especializado e a implementação imediata de medidas corporativas de suporte psicossocial.";
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
