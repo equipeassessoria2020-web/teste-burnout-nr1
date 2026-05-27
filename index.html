@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Point da Massa - Marquinhos Pizzaria</title>
+    <title>Avaliação de Saúde Mental e Riscos Psicossociais - NR-1</title>
     <style>
         * {
             margin: 0;
@@ -12,177 +12,361 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background-color: #f8f9fa;
-            color: #333;
+            background-color: #f4f6f9;
+            color: #2b2d42;
+            line-height: 1.6;
+            padding-bottom: 3rem;
         }
         header {
-            background: linear-gradient(135deg, #e63946, #1d3557);
+            background: linear-gradient(135deg, #1d3557, #457b9d);
             color: white;
             text-align: center;
-            padding: 2.5rem 1rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 3rem 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         header h1 {
             font-size: 2.2rem;
             margin-bottom: 0.5rem;
         }
         header p {
-            font-size: 1rem;
+            font-size: 1.1rem;
             opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .badge-nr1 {
+            background-color: #e63946;
+            color: white;
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-top: 1rem;
+            letter-spacing: 1px;
         }
         .container {
-            max-width: 600px;
+            max-width: 700px;
             margin: 2rem auto;
             padding: 0 1rem;
-            padding-bottom: 2rem;
         }
-        .info-box {
+        .card {
             background: white;
-            padding: 1rem;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            border-left: 5px solid #e63946;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .info-box-pagamento {
-            background: white;
-            padding: 1rem;
-            border-radius: 10px;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             margin-bottom: 1.5rem;
-            border-left: 5px solid #25d366;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-        .secao-titulo {
-            font-size: 1.4rem;
-            color: #1d3557;
-            margin: 1.5rem 0 1rem 0;
-            border-bottom: 2px solid #e63946;
-            padding-bottom: 0.3rem;
-        }
-        .produto-card {
-            background: white;
+        .instrucoes {
+            background-color: #edf2f4;
+            border-left: 5px solid #457b9d;
             padding: 1rem;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            color: #1d3557;
+        }
+        .pergunta {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #edf2f4;
+            padding-bottom: 1.5rem;
+        }
+        .pergunta p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: #1d3557;
+        }
+        .opcoes {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .opcao {
+            display: flex;
             align-items: center;
+            background: #f8f9fa;
+            padding: 0.9rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid #e5e5e5;
+            transition: all 0.2s ease;
         }
-        .produto-info h3 {
-            font-size: 1.1rem;
-            color: #2b2d42;
-            margin-bottom: 0.2rem;
+        .opcao:hover {
+            background: #edf2f4;
+            border-color: #457b9d;
         }
-        .produto-info p {
-            font-size: 0.85rem;
-            color: #6c757d;
+        .opcao input {
+            margin-right: 12px;
+            transform: scale(1.2);
+            accent-color: #1d3557;
         }
-        .preco {
+        .btn-enviar {
+            background-color: #e63946;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1.2rem;
             font-weight: bold;
-            color: #e63946;
-            font-size: 1.1rem;
-            white-space: nowrap;
-            margin-left: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
+            transition: background 0.2s;
         }
-        /* Ajuste do botão para não cobrir o texto */
-        .area-botao {
+        .btn-enviar:hover {
+            background-color: #c1121f;
+        }
+        #resultado {
+            display: none;
+        }
+        .resultado-titulo {
+            font-size: 1.6rem;
+            color: #1d3557;
+            margin-bottom: 1.2rem;
             text-align: center;
-            margin-top: 2.5rem;
-            margin-bottom: 1rem;
+            font-weight: bold;
         }
-        .btn-whatsapp {
-            background-color: #25d366;
+        .score-box {
+            background: #f1faee;
+            border: 2px dashed #457b9d;
+            padding: 1.2rem;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            color: #1d3557;
+        }
+        .box-download {
+            background-color: #fff;
+            border: 2px solid #1d3557;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .box-download h3 {
+            color: #1d3557;
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+        }
+        .box-download p {
+            color: #333;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        .imagem-ebook {
+            max-width: 260px;
+            height: auto;
+            border-radius: 8px;
+            margin: 0 auto 1.5rem auto;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .card-ebook {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #e63946;
+            text-align: left;
+        }
+        .btn-download {
+            background-color: #e63946;
             color: white;
             text-decoration: none;
-            padding: 1.2rem 2rem;
+            padding: 1.1rem 2.5rem;
             border-radius: 50px;
             font-weight: bold;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            width: 100%;
-            justify-content: center;
+            font-size: 1.15rem;
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
             transition: background 0.3s;
         }
-        .btn-whatsapp:hover {
-            background-color: #128c7e;
+        .btn-download:hover {
+            background-color: #c1121f;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Point da Massa</h1>
-        <p>🍕 Marquinhos Pizzaria 🍕</p>
-        <p style="margin-top: 5px; font-size: 0.9rem;">📍 Conj. Habitacional - Itapevi / SP</p>
+        <h1>Triagem de Estresse Ocupacional e Burnout</h1>
+        <p>Avaliação de riscos psicossociais e apoio ao Programa de Gerenciamento de Riscos (PGR).</p>
+        <div class="badge-nr1">DIRETRIZES DA NR-1</div>
     </header>
 
     <div class="container">
-        <div class="info-box">
-            <p><strong>📞 WhatsApp:</strong> (11) 99149-2436</p>
-            <p style="margin-top: 5px;"><strong>⏰ Horário:</strong> Aberto para Jantar (até 00:00)</p>
-            <p style="margin-top: 5px;"><strong>🛵 Serviços:</strong> Entrega sem contato, Retirada ou Refeição no local</p>
-        </div>
-
-        <div class="info-box-pagamento">
-            <p><strong>💳 Formas de Pagamento:</strong></p>
-            <p style="margin-top: 5px; font-size: 0.9rem; color: #555;">Crédito, Débito, Pix, Alelo, Pluxee, Ticket Restaurante e Vale Refeição.</p>
-        </div>
-
-        <h2 class="secao-titulo">Pizzas Tradicionais</h2>
-
-        <div class="produto-card">
-            <div class="produto-info">
-                <h3>Muçarela</h3>
-                <p>Molho de tomate fresco, muçarela de alta qualidade, rodelas de tomate e azeitonas.</p>
+        
+        <form id="burnoutForm" class="card" onsubmit="calcularResultado(event)">
+            <div class="instrucoes">
+                <strong>Instruções:</strong> Responda às questões abaixo com base nos seus sentimentos e rotina de trabalho nos últimos meses. A sua participação ajuda a identificar precocemente sinais de esgotamento.
             </div>
-            <div class="preco">R$ 35,00</div>
-        </div>
-
-        <div class="produto-card">
-            <div class="produto-info">
-                <h3>Calabresa</h3>
-                <p>Molho de tomate, calabresa fatiada artesanal, cebola fresca e azeitonas pretas.</p>
+            
+            <div class="pergunta">
+                <p>1. Com que frequência sente exaustão física ou mental extrema logo no início ou após a jornada de trabalho?</p>
+                <div class="opcoes">
+                    <label class="opcao"><input type="radio" name="p1" value="0" required> Raramente ou nunca</label>
+                    <label class="opcao"><input type="radio" name="p1" value="1"> Algumas vezes por mês</label>
+                    <label class="opcao"><input type="radio" name="p1" value="2"> Várias vezes por semana</label>
+                    <label class="opcao"><input type="radio" name="p1" value="3"> Diariamente</label>
+                </div>
             </div>
-            <div class="preco">R$ 35,00</div>
-        </div>
 
-        <div class="produto-card">
-            <div class="produto-info">
-                <h3>Portuguesa</h3>
-                <p>Presunto, ovos, cebola, ervilha, muçarela e cobertura especial da casa.</p>
+            <div class="pergunta">
+                <p>2. Sente que o volume de prazos, metas ou exigências laborais ultrapassa a sua capacidade de gestão saudável?</p>
+                <div class="opcoes">
+                    <label class="opcao"><input type="radio" name="p2" value="0" required> Não, o ritmo é totalmente equilibrado</label>
+                    <label class="opcao"><input type="radio" name="p2" value="1"> Ocasionalmente sinto sobrecarga</label>
+                    <label class="opcao"><input type="radio" name="p2" value="2"> Frequentemente sinto que estou no limite</label>
+                    <label class="opcao"><input type="radio" name="p2" value="3"> Constantemente acima do que consigo tolerar</label>
+                </div>
             </div>
-            <div class="preco">R$ 40,00</div>
-        </div>
 
-        <h2 class="secao-titulo">Pizzas Especiais</h2>
-
-        <div class="produto-card">
-            <div class="produto-info">
-                <h3>Frango com Catupiry</h3>
-                <p>Frango desfiado temperado coberto com o legítimo Catupiry cremoso.</p>
+            <div class="pergunta">
+                <p>3. Tem sentido dificuldades acentuadas em desligar-se mentalmente das obrigações profissionais nas suas horas de descanso?</p>
+                <div class="opcoes">
+                    <label class="opcao"><input type="radio" name="p3" value="0" required> Não, desligo-me com facilidade</label>
+                    <label class="opcao"><input type="radio" name="p3" value="1"> Às vezes penso em problemas do trabalho</label>
+                    <label class="opcao"><input type="radio" name="p3" value="2"> Frequentemente passo o descanso preocupado</label>
+                    <label class="opcao"><input type="radio" name="p3" value="3"> Nunca consigo desligar-me do ambiente corporativo</label>
+                </div>
             </div>
-            <div class="preco">R$ 42,00</div>
-        </div>
 
-        <div class="produto-card">
-            <div class="produto-info">
-                <h3>Quatro Queijos</h3>
-                <p>Uma combinação perfeita de muçarela, catupiry, provolone e gorgonzola.</p>
+            <div class="pergunta">
+                <p>4. Notou um distanciamento afetivo, apatia ou sentimentos mais cínicos e negativos em relação às suas tarefas?</p>
+                <div class="opcoes">
+                    <label class="opcao"><input type="radio" name="p4" value="0" required> Não, mantenho a motivação e empatia</label>
+                    <label class="opcao"><input type="radio" name="p4" value="1"> Raramente sinto indiferença</label>
+                    <label class="opcao"><input type="radio" name="p4" value="2"> Sim, sinto desânimo frequente com o ambiente</label>
+                    <label class="opcao"><input type="radio" name="p4" value="3"> Totalmente apático(a) e sem perspetivas na função</label>
+                </div>
             </div>
-            <div class="preco">R$ 45,00</div>
-        </div>
 
-        <div class="area-botao">
-            <a href="https://wa.me/5511991492436?text=Ol%C3%A1%20Marquinhos%2C%20vi%20o%20seu%20card%C3%A1pio%20digital%20e%20gostaria%20de%20fazer%20um%20pedido!" class="btn-whatsapp" target="_blank">
-                📱 Fazer Pedido no WhatsApp
-            </a>
+            <div class="pergunta">
+                <p>5. O estresse gerado no trabalho tem provocado sintomas físicos frequentes (como dores de cabeça, insónia ou tensões)?</p>
+                <div class="opcoes">
+                    <label class="opcao"><input type="radio" name="p5" value="0" required> Não apresento queixas físicas</label>
+                    <label class="opcao"><input type="radio" name="p5" value="1"> Sinto dores ou insónia esporádicas</label>
+                    <label class="opcao"><input type="radio" name="p5" value="2"> Sim, as queixas físicas têm sido comuns</label>
+                    <label class="opcao"><input type="radio" name="p5" value="3"> Sim, sofro com dores intensas e distúrbios de sono constantes</label>
+                </div>
+            </div>
+
+            <div class="pergunta">
+                <p>6. Sente uma perda de autoconfiança profissional ou a sensação de que os seus esforços não geram resultados?</p>
+                <div class="opcoes">
+                    <label class="opcao"><input type="radio" name="p6" value="0" required> Não, sinto-me produtivo(a) e seguro(a)</label>
+                    <label class="opcao"><input type="radio" name="p6" value="1"> Ocasionalmente duvido do meu rendimento</label>
+                    <label class="opcao"><input type="radio" name="p6" value="2"> Frequentemente sinto ineficácia nas ações</label>
+                    <label class="opcao"><input type="radio" name="p6" value="3"> Sinto total frustração e incapacidade produtiva</label>
+                </div>
+            </div>
+
+            <div class="pergunta">
+                <p>7. Nota irritabilidade excessiva, impaciência ou alterações de humor bruscas com colegas de equipa ou clientes?</p>
+                <div class="opcoes">
+                    <label class="opcao"><input type="radio" name="p7" value="0" required> Não, mantenho o autocontrolo tranquilo</label>
+                    <label class="opcao"><input type="radio" name="p7" value="1"> Às vezes sou um pouco mais ríspido(a)</label>
+                    <label class="opcao"><input type="radio" name="p7" value="2"> Sinto atritos e impaciência constantes no setor</label>
+                    <label class="opcao"><input type="radio" name="p7" value="3"> Estou em conflito permanente ou evito qualquer contacto</label>
+                </div>
+            </div>
+
+            <div class="pergunta">
+                <p>8. Percebe lapsos de memória recorrentes, falta de foco ou lentidão para tomar decisões simples na rotina?</p>
+                <div class="opcoes">
+                    <label class="opcao"><input type="radio" name="p8" value="0" required> Concentração normal e raciocínio ágil</label>
+                    <label class="opcao"><input type="radio" name="p8" value="1"> Lapsos muito esporádicos</label>
+                    <label class="opcao"><input type="radio" name="p8" value="2"> Dificuldade clara em focar nas demandas</label>
+                    <label class="opcao"><input type="radio" name="p8" value="3"> Bloqueio mental frequente e incapacidade de foco</label>
+                </div>
+            </div>
+
+            <div class="pergunta">
+                <p>9. Sente falta de suporte, falta de autonomia ou injustiça nas decisões da liderança da organização?</p>
+                <div class="opcoes">
+                    <label class="opcao"><input type="radio" name="p9" value="0" required> Sinto-me apoiado(a) e valorizado(a)</label>
+                    <label class="opcao"><input type="radio" name="p9" value="1"> O suporte falha poucas vezes</label>
+                    <label class="opcao"><input type="radio" name="p9" value="2"> O ambiente apresenta falhas graves de apoio</label>
+                    <label class="opcao"><input type="radio" name="p9" value="3"> Total desamparo e falta de reconhecimento dos gestores</label>
+                </div>
+            </div>
+
+            <div class="pergunta">
+                <p>10. O cansaço acumulado faz com que sinta vontade de faltar ao emprego ou abandonar a sua carreira atual?</p>
+                <div class="opcoes">
+                    <label class="opcao"><input type="radio" name="p10" value="0" required> Não, estou comprometido(a) com a minha trajetória</label>
+                    <label class="opcao"><input type="radio" name="p10" value="1"> Pensei nisso em momentos de picos de estresse</label>
+                    <label class="opcao"><input type="radio" name="p10" value="2"> Penso nisso com bastante frequência semanal</label>
+                    <label class="opcao"><input type="radio" name="p10" value="3"> É o meu desejo principal, não suporto a rotina atual</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-enviar">Concluir Avaliação</button>
+        </form>
+
+        <div id="resultado" class="card">
+            <h2 class="resultado-titulo">Resultado da Análise Preliminar</h2>
+            
+            <div class="score-box" id="scoreTexto">
+                Pontuação Total: 0 de 30
+            </div>
+
+            <p id="feedbackTexto" style="margin-bottom: 1.5rem; text-align: center; color: #4a5568; font-size: 1.05rem;"></p>
+
+            <div class="box-download">
+                <h3>📖 Adquira Conhecimento e Proteção Legal</h3>
+                <p>
+                    Para compreender profundamente a sua situação, conhecer os seus direitos fundamentais e saber como aplicar as regras da <strong>NR-1</strong> a favor da sua integridade física e mental, aceda ao nosso guia especializado.
+                </p>
+                
+                <img src="image_0.jpeg" alt="Capa do E-book Guia Prático" class="imagem-ebook">
+                
+                <div class="card-ebook">
+                    <p style="margin: 0; font-weight: bold; color: #1d3557;">📚 E-book: Guia Prático de Combate ao Estresse Ocupacional</p>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9rem; color: #555;">Aprenda a mapear os riscos, conheça os limites da lei que resguarda o trabalhador de abusos e proteja-se ativamente contra o esgotamento no meio profissional.</p>
+                </div>
+
+                <a href="https://pay.kiwify.com.br" target="_blank" class="btn-download">
+                    Acessar Conteúdo Completo
+                </a>
+            </div>
         </div>
 
     </div>
 
+    <script>
+        function calcularResultado(event) {
+            event.preventDefault();
+            
+            let total = 0;
+            for (let i = 1; i <= 10; i++) {
+                const valor = document.querySelector('input[name="p' + i + '"]:checked').value;
+                total += parseInt(valor);
+            }
+            
+            document.getElementById('burnoutForm').style.display = 'none';
+            document.getElementById('resultado').style.display = 'block';
+            
+            const scoreTexto = document.getElementById('scoreTexto');
+            const feedbackTexto = document.getElementById('feedbackTexto');
+            
+            scoreTexto.innerText = "Pontuação Total: " + total + " de 30";
+            
+            if (total <= 10) {
+                feedbackTexto.innerText = "Nível Baixo / Estável: Os seus indicadores psicossociais encontram-se dentro de parâmetros de normalidade e controle. Mantenha práticas contínuas de equilíbrio e prevenção ativa na sua organização.";
+            } else if (total <= 20) {
+                feedbackTexto.innerText = "Nível Moderado / Alerta: Foram registados sinais evidentes de desgaste associados à rotina profissional. Recomenda-se reavaliar a distribuição de demandas, pausas e estratégias de apoio psicossocial no ambiente corporativo.";
+            } else {
+                feedbackTexto.innerText = "Nível Crítico / Alto Risco: Os dados demonstram índices agudos de esgotamento físico e mental equivalentes ao quadro severo de estresse crónico. É altamente aconselhável suporte profissional e intervenções de segurança do trabalho conforme preconiza a NR-1.";
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
