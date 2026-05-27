@@ -24,7 +24,6 @@
             padding: 3rem 1rem;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        /* Alerta de Importância do Teste */
         .alerta-importancia {
             background-color: #ffb703;
             color: #023047;
@@ -147,17 +146,18 @@
             text-align: center;
             font-weight: bold;
         }
+        
+        /* Caixa de pontuação base (as cores específicas vão entrar via JavaScript) */
         .score-box {
-            background: #f1faee;
-            border: 2px dashed #457b9d;
-            padding: 1.2rem;
+            padding: 1.5rem;
             text-align: center;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: bold;
             border-radius: 8px;
             margin-bottom: 1.5rem;
-            color: #1d3557;
+            transition: all 0.3s ease;
         }
+        
         .box-download {
             background-color: #fff;
             border: 2px solid #1d3557;
@@ -381,11 +381,24 @@
             
             scoreTexto.innerText = "Pontuação Total: " + total + " de 30";
             
+            // Lógica de Cores Dinâmicas conforme o Resultado
             if (total <= 10) {
+                // VERDE: Nível Estável
+                scoreTexto.style.backgroundColor = "#d8f3dc";
+                scoreTexto.style.color = "#1b4332";
+                scoreTexto.style.border = "2px solid #52b788";
                 feedbackTexto.innerText = "Nível Baixo / Estável: Os seus indicadores psicossociais encontram-se dentro de parâmetros de normalidade e controle. Mantenha práticas contínuas de equilíbrio e prevenção ativa na sua organização.";
             } else if (total <= 20) {
+                // AMARELO: Alerta
+                scoreTexto.style.backgroundColor = "#fefae0";
+                scoreTexto.style.color = "#606c38";
+                scoreTexto.style.border = "2px solid #dda15e";
                 feedbackTexto.innerText = "Nível Moderado / Alerta: Foram registados sinais evidentes de desgaste associados à rotina profissional. Recomenda-se reavaliar a distribuição de demandas, pausas e estratégias de apoio psicossocial no ambiente corporativo.";
             } else {
+                // VERMELHO: Crítico
+                scoreTexto.style.backgroundColor = "#f8d7da";
+                scoreTexto.style.color = "#842029";
+                scoreTexto.style.border = "2px solid #f5c2c7";
                 feedbackTexto.innerText = "Nível Crítico / Alto Risco: Os dados demonstram índices agudos de esgotamento físico e mental equivalentes ao quadro severo de estresse crónico. É altamente aconselhável suporte profissional e intervenções de segurança do trabalho conforme preconiza a NR-1.";
             }
             
